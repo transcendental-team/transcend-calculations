@@ -14,7 +14,7 @@ public class Functions {
 	 */
 	public static double getSinh_TaylorSeries(double user_Input_in_Radians){
 	    double percision = 0.0000000000000000001;
-	    double element_in_Series = user_Input_in_Radians;  //first expansion term is x;
+	    double element_in_Series = user_Input_in_Radians;  //first expansion term is user_Input_in_Radians;
 	    double summation_of_Elements = 0.0;
 	    boolean negative_Input = false;
 	    int expansion_Order = 1;
