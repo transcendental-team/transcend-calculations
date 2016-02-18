@@ -11,8 +11,9 @@ import java.util.function.DoubleFunction;
 public class hyperbolicFunction {
 
 	public static void main(String[] args) {
-		   double x = 100;
-			long start = System.currentTimeMillis(); 
+		   double x = 150;
+
+		   long start = System.currentTimeMillis(); 
 
 		   // print the hyperbolic sine for these doubles
 		   System.out.println("sinh(" + x + ")=" + Math.sinh(x));
@@ -26,7 +27,7 @@ public class hyperbolicFunction {
 			
 			start = System.currentTimeMillis(); 
 			
-			System.out.println("Taylor series sinh(" + x + ")=" + taylorSeriesSinh(x, 5));
+			System.out.println("Taylor series sinh(" + x + ")=" + getSinh_TaylorSeries(x));
 			
 			elapsedTimeMillis = System.currentTimeMillis()-start; 
 			System.out.println("Elapsed time in milliseconds "+elapsedTimeMillis);
@@ -36,7 +37,7 @@ public class hyperbolicFunction {
 			
 			start = System.currentTimeMillis(); 
 			
-			System.out.println("Taylor series sinh(" + x + ")=" + sinhTaylorExp(x));
+			System.out.println("Taylor series exponential sinh(" + x + ")=" + sinhTaylorExp(x));
 			
 			elapsedTimeMillis = System.currentTimeMillis()-start; 
 			System.out.println("Elapsed time in milliseconds "+elapsedTimeMillis);
@@ -44,45 +45,89 @@ public class hyperbolicFunction {
 			
 			start = System.currentTimeMillis(); 
 			
-			System.out.println("Pade appriximation sinh(" + x + ")=" + sinhPadeExp(x));
+			System.out.println("Pade appriximation exp(" + x + ")=" + padeExp(x));
 			
 			elapsedTimeMillis = System.currentTimeMillis()-start; 
 			System.out.println("Elapsed time in milliseconds "+elapsedTimeMillis);
-			
 
 	}
 
 
-	/**method hyperbolic sinh talyor expansion 
-	 * Compute the sinh of the angle theta using the taylor series expansion while the input term number
-	 * @chao wang
-	 * @version 1
-	 * @param var as the input variable
-	 * @param expansionOrer as the expansion terms
+	/**method hyperbolic sinh using talyor expansion 
+	 * Compute the sinh of the angle theta using the taylor series expansion with the increase of expansion term
+	 * till the adding element is less than e-20
+	 * Implementation from: wiki: Taylor series
+	 * @see http://stackoverflow.com/questions/30166785/java-program-gives-incorrect-taylor-series-term-for-function-ex
+	 * @author Chao
+	 * @version 2
+	 * @param userInputInRadians as the input variable in radians
 	 */
-	public static double taylorSeriesSinh(double theta, int expansionOrder){
-        double  returnResult = 0; // this  will be the return result
+	public static double getSinh_TaylorSeries(double user_Input_in_Radians){
+	    double percision = 0.0000000000000000001;
+	    double element_in_Series = user_Input_in_Radians;  //first expansion term is x;
+	    double summation_of_Elements = 0.0;
+	    boolean negative_Input = false;
+	    int expansion_Order = 1;
+
+	    // if user input is negative number, we use sinh(x)=-sinh(-x) property. calcualte sinh(-x)
+	    if (user_Input_in_Radians < 0) {
+	    	negative_Input = true;
+	    	user_Input_in_Radians=-user_Input_in_Radians;
+	    	element_in_Series = -element_in_Series;
+	    }
+	    
+ 
+	    do {
+	    	summation_of_Elements =summation_of_Elements+ element_in_Series;	 
+	    	// second expansion term is x^3/3!, third is x^5/5!, hence need to increase order 2 times
+	    	expansion_Order ++;
+	    	element_in_Series *= user_Input_in_Radians / expansion_Order ;
+	    	expansion_Order ++;
+	    	element_in_Series *= user_Input_in_Radians / expansion_Order ;
+	        
+	    	// validate if summation is exceed the limits.
+	    	if (summation_of_Elements > Double.MAX_VALUE) {
+	            System.out.println("Too Large");
+	            break;
+	        }
+	    }
+	    // Quit the summation loop if adding element is less than e-20
+	    while (element_in_Series >= percision);
+
+	    //if input is positive, return sinh(x), if input is negative, return -sinh(-x)
+	    return negative_Input ? -summation_of_Elements : summation_of_Elements;
         
-        for (int i=1; i<=expansionOrder*2;i=i+2){
-        	returnResult=returnResult+power(theta,i)/factorial(i);
-        }
-        
-        return returnResult;
 	}
 	
 	/**method  exponentional talyor expansion 
 	 * @version 1
 	 * @param x as power term e^x
-	 * @param y as the expansion terms
-	 */
-	public static double taylorSeriesExp(double x, int y){
-        double  result = 1; // this  will be the result
-        
-        for (int i=1; i<=y;i=i+1){
-        	result=result+power(x,i)/factorial(i);
-        }
-        
-        return result;
+	 */	
+	public static double taylorSeriesExp(double x) {
+	    double eps = 0.0000000000000000001;
+	    double elem = 1.0;
+	    double sum = 0.0;
+	    boolean negative = false;
+	    int i = 1;
+	    sum = 0.0;
+
+	    if (x < 0) {
+	        negative = true;
+	        x = -x;
+	    }
+
+	    do {
+	        sum += elem;
+	        elem *= x / i;
+	        i++;
+	        if (sum > Double.MAX_VALUE) {
+	            System.out.println("Too Large");
+	            break;
+	        }
+	    }
+	    while (elem >= eps);
+
+	    return negative ? 1.0 / sum : sum;
 	}
 	
 	/**method pade approximation exponential function 
@@ -91,10 +136,10 @@ public class hyperbolicFunction {
 	 * @param theta as the exp(theta)
 	 * @return  results of exp(theta)
 	 */
-	public static double padeExp(double theta){
+	public static double padeExp(double userInputInDegree){
 		double padeResult=0;  // this  will be the result
-		padeResult=(1+(1.0/2)*theta+(1.0/9)*power(theta,2)+(1.0/72)*power(theta,3)+(1.0/1008)*power(theta,4)+(1.0/30240)*power(theta,5));
-		padeResult=padeResult/(1-0.5*theta+(1.0/9)*power(theta,2)-(1.0/72)*power(theta,3)+(1.0/1008)*power(theta,4)-(1.0/30240)*power(theta,5));
+		padeResult=(1+(1.0/2)*userInputInDegree+(1.0/9)*power(userInputInDegree,2)+(1.0/72)*power(userInputInDegree,3)+(1.0/1008)*power(userInputInDegree,4)+(1.0/30240)*power(userInputInDegree,5));
+		padeResult=padeResult/(1-0.5*userInputInDegree+(1.0/9)*power(userInputInDegree,2)-(1.0/72)*power(userInputInDegree,3)+(1.0/1008)*power(userInputInDegree,4)-(1.0/30240)*power(userInputInDegree,5));
 		return padeResult;
 	}
 	
@@ -103,8 +148,7 @@ public class hyperbolicFunction {
 	 * @param x as the input 
 	 */
 	public static double sinhTaylorExp(double x){
-		int expansionOrder=9;
-		return (taylorSeriesExp(x,expansionOrder)*taylorSeriesExp(x,expansionOrder)-1)/(2*taylorSeriesExp(x,expansionOrder));  //set order is 9
+		return (taylorSeriesExp(x)+taylorSeriesExp(-x))/2;  //set order is 9
 	}
 	
 	/**method hyperbolic sine derived from pade approximation series 
@@ -150,7 +194,7 @@ public class hyperbolicFunction {
     }
     
 	/**method pi approximation 
-	 * In 1997, David H. Bailey, Peter Borwein and Simon Plouffe published a paper (Bailey, 1997) on a new formula for ¦Ð as an infinite series:
+	 * In 1997, David H. Bailey, Peter Borwein and Simon Plouffe published a paper (Bailey, 1997) on a new formula for Ï€ as an infinite series:
 	 * @chao wang
 	 * @version 1
 	 * @param n as the order number
