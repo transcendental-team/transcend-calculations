@@ -50,10 +50,9 @@ public class Transcendental {
 		if (thetaRadians < 0){ 
 
 			thetaRadians *= -1;
-
-			thetaRadians %= temporaryPi * 2;
 		}
 
+		thetaRadians %= temporaryPi * 2;
 		double output = thetaRadians;
 		double factorial = 1;
 		double thetaMultiple = thetaRadians * thetaRadians;
