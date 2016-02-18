@@ -1,0 +1,4 @@
+Choose the implementation of Hyperbolic Sine because:
+1. it is one of the utilization of exponential function in Trigonometric. It would be interested to discover.
+2. Its result can be derived from the exponential function, (exp(x)+exp(-x))/2, therfore it can be calcuated from numerical method of exp(x), also it could find its own numerical approach. It would be interested to compare and find the difference.
+3. Its has the property of odd symmetric, and when x-->infinity, sinh(x)--> infinite. It would be interested to observe the numerical result's accuracy when input radians being negative, and bening infinitely large.
