@@ -29,7 +29,7 @@ public class Transcendental {
 		double sum = 1;
 		int iteration = 0;
 		while (absolute(sum) > smallestIteration) {
-			sum = ((iteration % 2 == 0) ? 1 : -1) / (2 * iteration + 1.0);
+			sum = ((iteration % 2 == 0) ? 1 : -1) / (2 * iteration + 1.0); //2*iteration+1.0 is denominator
 			pi += sum;
 			iteration++;
 		}
