@@ -132,4 +132,24 @@ public class Functions {
 		 */
 		return floor + result;
 	}//end ln2()
+	
+	/* Calculates ln(x) based on adding 
+	 * integer fractions from 1/10^n to 1/x*10^(n+1)
+	 * based on:
+	 * [integral](1/x)dx = ln x
+	 * Very inefficient and slow!
+	 * https://www.physicsforums.com/threads/ln-x-algorithm.4540/
+	 */
+	public static double ln3(double input){
+		double result = 0;
+		int power = 9;
+		double divisor = powerOfInt(10, power);
+		double limit = input*divisor;
+		while (divisor <= limit){
+			result += 1/divisor;
+			divisor++;
+		}
+		return result;
+	} //end ln3()
+
 }
