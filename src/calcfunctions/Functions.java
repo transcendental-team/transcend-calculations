@@ -23,32 +23,49 @@ public class Functions {
 		return logb10(x) / logb10(E);
 	}
 	
-	/*
+	/**
 	 * Returns the base-10 logarithm of the input double
-	 * @param x
-	 * @return log10(x)
+	 * http://www.everything2.com/title/Logarithm+algorithm
+	 * @param input
+	 * @return log base 10 of input
 	 */
-	public static double logb10(double x){
-		double log_x = 0;
-		double exponent;
-		//TODO: Team decision on invalid inputs!
-		if (x <= 0){
+	public static double logb10(double input){
+		
+		if (input <= 0){
 			return 0.0/0.0; //return NaN
 		}
-		if (x == 10){
+		if (input == 10){
 			return 1;
 		}
-		for (int i = 0; i < 18; i++){
-			exponent = 0.0;
-			while (x > 10){
-				x /= 10;
-				exponent++;
-			}
-			log_x += (exponent * (powerOfInt(10, -i)));
-			x = powerOfInt(x, 10);
+		if (input == 1){
+			return 0;
 		}
-		return log_x;
-	} //end logb10()
+		if (input < 1){  // take the log of the reciprocal and invert the sign
+			return (-1) * logHelper(10, 1/input);
+		}
+		return logHelper(10, input);
+	}
+	
+	/**
+	 * Helper method for log function with an integer base
+	 * @param base
+	 * @param input is an input validated by the main method 
+	 * @return the l
+	 */
+	public static double logHelper(int base, double input){
+		double result = 0;
+		double floor;
+		for (int iter = 0; iter < 18; iter++){
+			floor = 0.0;
+			while (input > base){
+				input /= base;
+				floor++;
+			}
+			result += (floor * (powerOfInt(base, -iter)));
+			input = powerOfInt(input, base);
+		}
+		return result;
+	}
 	
 	/* Calculates base to the power of an integer exponent
 	 * Helper function for logb10()
@@ -60,14 +77,14 @@ public class Functions {
 		if (exp == 0)
 			return 1;
 		if (exp > 0){
-			for (int i = 0; i < exp; i++){
+			for (int iter = 0; iter < exp; iter++){
 				result *= base;
 			}
 			return result;
 		}
 		//Repeated Code: could be improved
 		else{
-			for (int i = 0; i < (-1 * exp); i++){
+			for (int iter = 0; iter < (-1 * exp); iter++){
 				result *= base;
 			}
 			return 1 / result;
