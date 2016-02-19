@@ -12,17 +12,17 @@ public class Functions {
 	 * @version 2
 	 * @param userInputInRadians as the input variable in radians
 	 */
-	public static double getSinhTaylor(double aRadians){
+	public static double getSinhTaylor(double aRadian){
 	    double percision = 0.0000000000000000001;
-	    double elementInSeries = aRadians;  //first expansion term is user_Input_in_Radians;
+	    double elementInSeries = aRadian;  //first expansion term is user_Input_in_Radians;
 	    double summationOfElements = 0.0;
 	    boolean negativeInput = false;
 	    int expansionOrder = 1;
 
 	    // if user input is negative number, we use sinh(x)=-sinh(-x) property. calcualte sinh(-x)
-	    if (aRadians < 0) {
+	    if (aRadian < 0) {
 	    	negativeInput = true;
-	    	aRadians=-aRadians;
+	    	aRadian=-aRadian;
 	    	elementInSeries = -elementInSeries;
 	    }
 	    
@@ -31,9 +31,9 @@ public class Functions {
 	    	summationOfElements =summationOfElements+ elementInSeries;	 
 	    	// second expansion term is x^3/3!, third is x^5/5!, hence need to increase order 2 times
 	    	expansionOrder ++;
-	    	elementInSeries *= aRadians / expansionOrder ;
+	    	elementInSeries *= aRadian / expansionOrder ;
 	    	expansionOrder ++;
-	    	elementInSeries *= aRadians / expansionOrder ;
+	    	elementInSeries *= aRadian / expansionOrder ;
 	        
 	    	// validate if summation is exceed the limits.
 	    	if (summationOfElements > Double.MAX_VALUE) {
