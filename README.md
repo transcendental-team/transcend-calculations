@@ -13,7 +13,7 @@ Math library.
 
 The equivalent to 2 iterations of the babylonian method:
 <br> https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method
-<br> A quick method to calculate the square root of a positive number. The approximations are accurate to 4 digits in the mantissa for integers. However, this method proves ineffective for computing the square roots of irrational numbers. When compared to Java's Pi implementation, it failed within an error tolerance of 1e-2. 
+<br><br> A quick method to calculate the square root of a positive number. The approximations are accurate to 4 digits in the mantissa for integers. However, this method proves ineffective for computing the square roots of irrational numbers. When compared to Java's Pi implementation, it failed within an error tolerance of 1e-2. 
 <br>
 <br>
 <br>
