@@ -1,5 +1,6 @@
 #Square Root Method for Eternity
-Two distinct methods for calculating the square root of a double.
+Testing and choice implementations avaiable in the squareroot package.
+<br>Finalized algorithm available in the calculatorfunction package.
 <br><br>Accuracy of both methods were tested using JUnit 4
 and compared against Java's implementation from the 
 Math library.
@@ -12,9 +13,9 @@ Math library.
 
 <br> The equivalent to 2 iterations of the babylonian method:
 <br> https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method
-<br> This is a quick method to calculate the square root of a positive number. The approximations are accurate to 4 digits in the mantissa for integers. However, this method proves ineffective for computing the square roots of irrational numbers. When compared to Java's Pi implementation, it failed within an error tolerance of 1e-2. 
+This is a quick method to calculate the square root of a positive number. The approximations are accurate to 4 digits in the mantissa for integers. However, this method proves ineffective for computing the square roots of irrational numbers. When compared to Java's Pi implementation, it failed within an error tolerance of 1e-2. 
 
-<br> <b>Method 2: Newton's Iteration</b> 
+<b>Method 2: Newton's Iteration</b> 
 <br>http://introcs.cs.princeton.edu/java/13flow/Sqrt.java.html
 <br><br> <img src="http://latex.codecogs.com/gif.latex?x%20_%7Bk&plus;1%7D%20%3D%20%5Cdfrac%7B1%7D%7B2%7D%20%5Cleft%28%20x_%7Bk%7D%20&plus;%20%5Cdfrac%7Bn%7D%7Bx_%7Bk%7D%7D%20%5Cright%29" border="0"/>
 
