@@ -1,4 +1,3 @@
-package sinh;
 
 import java.lang.*;
 import java.lang.management.ManagementFactory;
