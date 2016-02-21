@@ -1,0 +1,17 @@
+package calculatorfuntion;
+
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
+public class JUnitTest {
+
+    @Test
+
+    public void testPowerFunctionLimit(){
+
+        double error = 0.000001;
+        double testNumber = -3.5;
+
+        assertEquals(Math.pow(10.0, testNumber), PowerFunction.powerFuctionLimit(testNumber), error);
+    }
+}
