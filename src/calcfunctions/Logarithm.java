@@ -44,7 +44,8 @@ public class Logarithm {
 		if (input == 1){
 			return 0;
 		}
-		if (input < 1){  // take the log of the reciprocal and invert the sign
+		// take the log of the reciprocal and invert the sign
+		if (input < 1){  
 			return (-1) * logHelper(10, 1/input);
 		}
 		return logHelper(10, input);
