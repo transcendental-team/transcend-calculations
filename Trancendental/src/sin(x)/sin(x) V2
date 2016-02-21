@@ -1,0 +1,86 @@
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.MemoryUsage;
+import java.util.List;
+import java.util.function.DoubleFunction;
+
+public class Transcendental {
+
+	private static double temporaryPi = 0;
+
+	/**
+	 * @return the absolute value of the number
+	 */
+	private static double absolute(double number) {
+		if (number < 0)
+			return -number;
+		return number;
+	}
+
+	/**
+	 * Calculate pi using Leibniz formula.
+	 * source: https://goparallel.sourceforge.net/calculate-pi-with-custom-c-class/
+	 *
+	 * @param smallestIteration the smallest value of iteration which should be calculated
+	 * @return the constant pi
+	 */
+	public static final double pi(double smallestIteration) {
+		double pi = 0;
+		double sum = 1;
+		int iteration = 0;
+		while (absolute(sum) > smallestIteration) {
+			sum = ((iteration % 2 == 0) ? 1 : -1) / (2 * iteration + 1.0); //2*iteration+1.0 is denominator
+			pi += sum;
+			iteration++;
+		}
+		return pi * 4;
+	}
+
+	/**
+	 * Compute the sine of the angle theta using the taylor series expansion while the factorial term is finite
+	 *
+	 * @return output the sine of the angle theta which was given in radians.
+	 * @version 2
+	 */
+	public static final double sine1(double thetaRadians) {
+		if (temporaryPi == 0) {
+			temporaryPi = pi(1e-6);
+		}
+		// compute the sine using the taylor series while the factorial term is finite
+		if (thetaRadians < 0){ 
+
+			thetaRadians *= -1;
+		}
+
+		thetaRadians %= temporaryPi * 2;
+		double output = thetaRadians;
+		double factorial = 1;
+		double thetaMultiple = thetaRadians * thetaRadians;
+
+		for (int iteration = 0; factorial < Double.POSITIVE_INFINITY; iteration++) {
+			factorial *= (2 * iteration + 2) * (2 * iteration + 3);
+			thetaRadians *= thetaMultiple;
+			output += (iteration % 2 == 0 ? -1 : 1) * thetaRadians / factorial;
+		}
+
+		return output;
+
+	}
+
+	/**
+	 * Computed recursively the sine of an angle using Bhaskara I's sine approximation formula
+	 * The runtime of this method will be significantly less than the sine1 function.
+	 * However, the calculations will be slightly less accurate.
+	 *
+	 * @param theta
+	 * @return sine of angle theta which was given in radians.
+	 * @Version 2
+	 */
+	public static final double sine2(double thetaRadians) {
+		if (temporaryPi == 0){
+			temporaryPi = pi(1e-6);
+		}
+		return 16 * thetaRadians * (temporaryPi - thetaRadians) /
+				(5 * temporaryPi * temporaryPi - 4 * thetaRadians * (temporaryPi - thetaRadians));
+	}
+

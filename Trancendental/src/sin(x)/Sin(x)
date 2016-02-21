@@ -1,0 +1,76 @@
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.MemoryUsage;
+import java.util.List;
+import java.util.Scanner;
+import java.util.function.DoubleFunction;
+
+public class Transcendental {
+
+    private static double cachedPi = 0;
+
+    /**
+     * Compute the sine of the angle theta using the taylor series expansion while the factorial term is finite
+     *
+     * @return the sine of the angle theta
+     * @version 2
+     */
+    public static final double sine1(double theta) {
+        if (cachedPi == 0) cachedPi = pi(1e-8);
+        // compute the sine using the taylor series while the factorial term is finite
+        if (theta < 0) theta *= -1;
+        theta %= cachedPi * 2;
+        double out = theta;
+        double factorial = 1;
+        double save = theta * theta;
+        for (int iteration = 0; factorial < Double.POSITIVE_INFINITY; iteration++) {
+            factorial *= (2 * iteration + 2) * (2 * iteration + 3);
+            theta *= save;
+            out += (iteration % 2 == 0 ? -1 : 1) * theta / factorial;
+        }
+        return out;
+    }
+
+    /**
+     * Compute the sine of an angle using Bhaskara I's sine approximation formula
+     * The runtime of this method will be significantly less than the sine1 function.
+     * However, the calculations will be slightly less accurate.
+     *
+     * @param theta the angle to compute the sine of
+     * @return the sine of the angle.
+     */
+    public static final double sine2(double theta) {
+        if (cachedPi == 0) cachedPi = pi(1e-8);
+        theta %= cachedPi * 2;
+        return 16 * theta * (cachedPi - theta) /
+                (5 * cachedPi * cachedPi - 4 * theta * (cachedPi - theta));
+    }
+
+    /**
+     * Calculate pi using Leibniz formula.
+     * source: https://goparallel.sourceforge.net/calculate-pi-with-custom-c-class/
+     *
+     * @param epsilon the smallest value of iteration which should be calculated
+     * @return the constant pi
+     */
+    public static final double pi(double epsilon) {
+        double pi = 0;
+        double n = Double.MAX_VALUE;
+        int i = 0;
+        while (abs(n) > epsilon) {
+            n = ((i % 2 == 0) ? 1 : -1) / (2. * i + 1);
+            pi += n;
+            i++;
+        }
+        return pi * 4;
+    }
+
+    /**
+     * @return the absolute value of the number
+     */
+    private static double abs(double number) {
+        if (number < 0)
+            return -number;
+        return number;
+    }
