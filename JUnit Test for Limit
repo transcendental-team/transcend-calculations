@@ -10,7 +10,7 @@ public class JUnitTest {
     public void testPowerFunctionLimit(){
 
         double error = 0.000001;
-        double testNumber = MATH.PI;
+        double testNumber = Math.PI;
 
         assertEquals(Math.pow(10.0, testNumber), PowerFunction.powerFuctionLimit(testNumber), error);
     }
