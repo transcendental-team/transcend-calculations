@@ -11,6 +11,7 @@ https://en.wikipedia.org/wiki/Taylor_series
 
 ![taylor 1](https://cloud.githubusercontent.com/assets/17072375/13200680/131b71b6-d821-11e5-8f6f-85a7ed4cc33c.PNG)
 
+Expressed as:
 
 ![taylor2](https://cloud.githubusercontent.com/assets/17072375/13200682/13203dea-d821-11e5-95f9-d2504d42181c.PNG)
 
