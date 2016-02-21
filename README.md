@@ -6,6 +6,7 @@
 	That is; Taylor Series Centered at Zero
 	
 http://www.saylor.org/site/wp-content/uploads/2012/09/MA102-5.5.3-Taylor-and-MacLaurin-Series.pdf
+
 https://en.wikipedia.org/wiki/Taylor_series
 
 ![taylor 1](https://cloud.githubusercontent.com/assets/17072375/13200680/131b71b6-d821-11e5-8f6f-85a7ed4cc33c.PNG)
