@@ -10,7 +10,7 @@ public class JUnitTest {
     public void testPowerFunctionTaylor(){
 
         double error = 0.000001;
-        double testNumber = -3.5;
+        double testNumber = Math.PI;
 
         assertEquals(Math.pow(10.0, testNumber), PowerFunction.powerFunctionOf10(testNumber), error);
     }
