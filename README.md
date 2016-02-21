@@ -30,6 +30,8 @@ https://en.wikipedia.org/wiki/Bhaskara_I's_sine_approximation_formula
 
 ![b1](https://cloud.githubusercontent.com/assets/17072375/13200681/131ede3c-d821-11e5-837a-323fcd6c4bd0.PNG)
 
+
+
  
 
 
