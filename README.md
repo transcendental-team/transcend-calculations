@@ -19,7 +19,7 @@ In mathematics a Padé approximant is the "best" approximation of a function by 
 
 ![hyperbolic function] https://upload.wikimedia.org/math/3/d/7/3d7a58b2ce9bc5dbe3e77f104aaabc07.png
 
-!https://upload.wikimedia.org/math/6/b/c/6bce7bb9dee9ce1b3f3a09de18fb5cb8.png
+![b1]https://upload.wikimedia.org/math/6/b/c/6bce7bb9dee9ce1b3f3a09de18fb5cb8.png
 
 
 
