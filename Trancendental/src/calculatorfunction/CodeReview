@@ -22,3 +22,7 @@ method naming convention matches to Java.lang.Math.sin(double a). Returns the tr
 ##              		double thetaMultiple = dRadians * dRadians;  ---------------------"thetaMultiple" change to "radiansMultiple" 
 
 Name consistency. Input names dRadians, dRadians * dRadians, should be "radiansMultiple"
+
+## 5)     	  @param theta value given in Radians by user.      ------------------------------"theta" change to "dRadians"
+
+Name consistency. Input names dRadians, javaDoc should be "dRadians"
