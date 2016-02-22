@@ -1,5 +1,7 @@
 package calculatorfunction;
 
+
+
 public class Transfunction {
 
 
@@ -16,7 +18,7 @@ public class Transfunction {
 	 * @return double value names dResult
 	 */
 	public static double sinh(double dRadian){
-	    double percision = 0.0000000000000000001;
+	    double percision = 0.00000000001;	// percision up to 10th digit after decimal point.
 	    double elementInSeries = dRadian;  //first expansion term is x/1!;
 	    double summationOfElements = 0.0;
 	    double dResult = 0.0;
@@ -36,10 +38,10 @@ public class Transfunction {
 	    	summationOfElements =summationOfElements + elementInSeries;	 
 	    	// second expansion term is  x^3/3!, third is x^5/5!, hence need to
 	    	//increase order 2 times
-	    	expansionOrder =expansionOrder+1;
-	    	elementInSeries =elementInSeries * dRadian / expansionOrder ;
-	    	expansionOrder =expansionOrder + 1;
-	    	elementInSeries =elementInSeries * dRadian / expansionOrder ;
+	    	expansionOrder = expansionOrder+1;
+	    	elementInSeries = elementInSeries * dRadian / expansionOrder ;
+	    	expansionOrder = expansionOrder + 1;
+	    	elementInSeries = elementInSeries * dRadian / expansionOrder ;
 	        
 	    	// validate if summation is exceed the limits.
 	    	if (summationOfElements > Double.MAX_VALUE) {
@@ -47,7 +49,7 @@ public class Transfunction {
 	            break;
 	        }
 	    }
-	    // Quit the summation loop if adding element is less than e-20
+	    // Quit the summation loop if adding element is less than 1e-11
 	    while (elementInSeries >= percision);
 	    
 	    dResult=summationOfElements;
