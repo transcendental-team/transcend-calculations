@@ -1,18 +1,16 @@
 package calculatorfunction;
 
-
-
 public class Transfunction {
 
 	/**method hyperbolic sinh using talyor expansion 
 	 * Compute the sinh of the angle dRadian using the taylor series expansion 
 	 * with the infinite expansion term  till the last expansion term is less 
-	 * than e-20
+	 * than e-10
 	 * formula: sinh(x) = x + x^3/3! +x^5/5! +....+ x^n/n! for all x
 	 * Implementation from: wiki: Taylor series
 	 * @see http://stackoverflow.com/questions/30166785/java-program-gives-incorrect-taylor-series-term-for-function-ex
 	 * @author Chao
-	 * @version 5
+	 * @version 5 ready to merge
 	 * @param dRadian as the double input variable in radian
 	 * @return hyperbolic sine function value
 	 */
@@ -36,17 +34,16 @@ public class Transfunction {
 	    	summationOfElements =summationOfElements + elementInSeries;	 
 	    	// second expansion term is  x^3/3!, third is x^5/5!, hence need to
 	    	//increase order 2 times
-<<<<<<< HEAD
+
 	    	expansionOrder += 1;
 	    	elementInSeries *= dRadian / expansionOrder ;
 	    	expansionOrder += 1;
 	    	elementInSeries *= dRadian / expansionOrder ;
-=======
+
 	    	expansionOrder = expansionOrder+1;
 	    	elementInSeries = elementInSeries * dRadian / expansionOrder ;
 	    	expansionOrder = expansionOrder + 1;
 	    	elementInSeries = elementInSeries * dRadian / expansionOrder ;
->>>>>>> origin/hyperbolicSine
 	        
 	    	// validate if summation is exceed the limits.
 	    	if (summationOfElements > Double.MAX_VALUE) {
