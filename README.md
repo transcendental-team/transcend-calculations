@@ -1,19 +1,24 @@
-# transcend-calculations
+## transcend-calculations
 Repository for COMP 5541 group calculator project
 
-Method 1: Taylor expansion of f(x) = sinh(x);
+##sinh(x) Implementations
+
+##Two methods implementation
+
+##Method 1: Taylor expansion of f(x) = sinh(x);
 
 Reference: https://en.wikipedia.org/wiki/Taylor_series
 
-sinh(x)=x+ x^3/3! +x^5/5! + x^7/7!....for all x
+![Taylor] (https://upload.wikimedia.org/math/d/3/1/d313574308b26ae8292951977a7ee638.png)
 
-Method 2: Pade approximate , definition of sinh(x)
+## Method 2: Pade approximate , definition of sinh(x) based on e(x)
 
 Reference: https://en.wikipedia.org/wiki/Pad%C3%A9_approximant
 
 In mathematics a Padé approximant is the "best" approximation of a function by a rational function of given order – under this technique, the approximant's power series agrees with the power series of the function it is approximating.
 
-sinh(x)=(exp(x)+exp(-x))/2
+![hyperbolic function] (https://upload.wikimedia.org/math/3/d/7/3d7a58b2ce9bc5dbe3e77f104aaabc07.png)
 
-exp(x)=(1+(1/2)*x+(1/9)*x^2+(1/72)*x^3+(1/1008)*x^4+(1/30240)*x^5)   /   1-(1/2)*x+(1/9)*x^2-(1/72)*x^3+(1/1008)*x^4-(1/30240)*x^5
+![b1] (https://upload.wikimedia.org/math/6/b/c/6bce7bb9dee9ce1b3f3a09de18fb5cb8.png)
+
 

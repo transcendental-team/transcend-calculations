@@ -1,5 +1,7 @@
 package calculatorfunction;
 
+
+
 public class Transfunction {
 
 	/**method hyperbolic sinh using talyor expansion 
@@ -34,10 +36,17 @@ public class Transfunction {
 	    	summationOfElements =summationOfElements + elementInSeries;	 
 	    	// second expansion term is  x^3/3!, third is x^5/5!, hence need to
 	    	//increase order 2 times
+<<<<<<< HEAD
 	    	expansionOrder += 1;
 	    	elementInSeries *= dRadian / expansionOrder ;
 	    	expansionOrder += 1;
 	    	elementInSeries *= dRadian / expansionOrder ;
+=======
+	    	expansionOrder = expansionOrder+1;
+	    	elementInSeries = elementInSeries * dRadian / expansionOrder ;
+	    	expansionOrder = expansionOrder + 1;
+	    	elementInSeries = elementInSeries * dRadian / expansionOrder ;
+>>>>>>> origin/hyperbolicSine
 	        
 	    	// validate if summation is exceed the limits.
 	    	if (summationOfElements > Double.MAX_VALUE) {
