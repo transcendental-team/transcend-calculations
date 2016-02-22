@@ -1,6 +1,8 @@
 #Sin(x) Implementations
 
 ##Two Variations for calculating the sine of theta given in Radians.
+####Testing of all implementations available in Transcendental.java
+####Final chosen algorithm available in the calculatorfunction package.
 
 ###Method 1: Taylor Series using McLaurin Expansion of Sin(x)
 	That is; Taylor Series Centered at Zero
