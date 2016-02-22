@@ -1,0 +1,17 @@
+package calculatorfuntion;
+
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
+public class JUnitTest {
+
+    @Test
+
+    public void testPowerFunctionTaylor(){
+
+        double error = 1e-11;
+        double testNumber = Math.PI;
+
+        assertEquals(Math.pow(10.0, testNumber), PowerFunction.powerFunctionOf10(testNumber), error);
+    }
+}
