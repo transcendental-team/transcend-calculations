@@ -1,6 +1,6 @@
 package calculatorfunction;
 
-public class Functions {
+public class Transfunction {
 
     /**
      * @author Xindi
@@ -10,32 +10,30 @@ public class Functions {
      * @return Power function of 10 value
      * @version 3
      */
-    public static double powerFunctionOf10(double dInput){
+    public static double pow10(double dInput){
 
         double dResult = 1.0;
         double term = 1.0;
-        double xln10 = dInput * Logarithm.ln(10.0);
-        int i = 1;
+        double xln10 = dInput * Transfunction.ln(10.0);
 
         if(dInput<0){
-            return 1/ powerFunctionOf10(-dInput);
+            return 1 / pow10(-dInput);
         }
 
         // apply Taylor series until getting the desired accuracy
-        while(term>1e-12){
-
-            term *= xln10/i;
+        int iterator = 1;
+        while(term > 1e-12){
+            term *= xln10 / iterator;
             dResult += term;
-            i++;
-
+            iterator++;
         }
 
         // handle floating-point numbers by default
-        double tempSum = dResult%1;
-
-        if (tempSum>0.99999){
-            dResult = dResult-tempSum+1;
-        }else if(tempSum<0.000001){
+        double tempSum = dResult % 1.0;
+        if (tempSum > 0.99999){
+            dResult -= tempSum+1;
+        }
+        else if (tempSum < 1e-6) {
             dResult -= tempSum;
         }
         return dResult;
