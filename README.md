@@ -4,7 +4,7 @@
 ####Testing of all implementations available in Transcendental.java
 ####Final chosen algorithm available in the calculatorfunction package.
 
-###Method 1: Taylor Series using McLaurin Expansion of Sin(x)
+###Method 1: Taylor Series using MacLaurin Expansion of Sin(x)
 	That is; Taylor Series Centered at Zero
 	
 http://www.saylor.org/site/wp-content/uploads/2012/09/MA102-5.5.3-Taylor-and-MacLaurin-Series.pdf
@@ -19,7 +19,7 @@ Expressed as:
 
   
  
-Integrating McLaurin Series we get 
+Integrating MacLaurin Series we get 
 
 ![t3](https://cloud.githubusercontent.com/assets/17072375/13200683/132184c0-d821-11e5-94b1-dcdcc528f12a.PNG)
  
