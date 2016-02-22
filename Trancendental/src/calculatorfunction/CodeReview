@@ -1,0 +1,24 @@
+## Code Review done by Chao Wang
+
+## 1)  public static final double Pi ------- "Pi" change to "PI" 
+
+Reference: http://www2.hawaii.edu/~tp_200/ics111/material/codingStandards.html
+
+To name constants use uppercase for each word and separate each pair of words with an underscore. This is only applicable in constant naming.
+final double PI = 3.1416;
+
+## 2) 			public static final double sine1(double dRadians) {
+##              double output -------------------"output" change to "dResult"
+
+"dResult", 'd' stands for double value. "dResult" is unified as the return value name for all of team member function.
+
+## 3)       	public static final double sine1(double dRadians)  -------------------- "sine1" change to "sin"
+
+Reference: https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html
+
+method naming convention matches to Java.lang.Math.sin(double a). Returns the trigonometric sine of an angle.
+
+## 4)     	public static final double sine1(double dRadians) {
+##              		double thetaMultiple = dRadians * dRadians;  ---------------------"thetaMultiple" change to "radiansMultiple" 
+
+Name consistency. Input names dRadians, dRadians * dRadians, should be "radiansMultiple"
