@@ -1,5 +1,9 @@
 package calculatorfunction;
-
+/**
+ * Group G Function Implementations
+ * @author Srikanth, Eric, Chao, Dan, Xindi
+ *
+ */
 public class Functions {
 
 	public static final double PI = calculatePi(); //Pi constant
