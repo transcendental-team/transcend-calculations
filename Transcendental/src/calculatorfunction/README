@@ -1,3 +1,27 @@
 Transfunction.java is the final deployed file only include the sinh method.
 
 HyperbolicBenchMarkTest is the test file, include the BenchMark of 2 different method, as well as the Test Main()
+
+Attached Code Review done by Xindi:
+
+Code Review for Hyperbolic Sine Function
+
+Reviewer : Xindi
+
+#Line 18 Comment consistency within class
+
+@return double value names dResultàchange to @return hyperbolic sine function value
+
+#Line 2, 3, 6, 35, 59 and 61 extra vertical whitespace
+
+within method bodies, should use single blank line
+
+#Line 38 to 44 avoid duplication
+
+i.e. Line 38 summationOfElements =summationOfElements + elementInSeries;
+
+àchange to summationOfElements += elementInSeries;
+
+#Line 55 need horizontal whitespace between variables and operator
+
+dResult=summationOfElementsàchange to dResult = summationOfElements;
