@@ -1,6 +1,6 @@
 package calculatorfunction;
 
-public class Function {
+public class Functions {
 
 	public static final double PI = calculatePi(); //Pi constant
 	public static final double E_NUMBER = calculateE(); //e constant
