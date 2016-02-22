@@ -2,7 +2,7 @@ package calculatorfunction;
 
 public class Transfunction {
 
-	public static final double PI = pi(); //Pi constant
+	public static final double PI = calculatePi(); //Pi constant
 
 	/**
 	 * @param num negative or positive number.
@@ -20,7 +20,7 @@ public class Transfunction {
 	 * source: https://goparallel.sourceforge.net/calculate-pi-with-custom-c-class/
 	 * @return the constant pi
 	 */
-	public static final double pi() {
+	private final static double calculatePi() {
 		double pi = 0;
 		double sum = 1;
 		int i = 0;
@@ -56,5 +56,6 @@ public class Transfunction {
 		return dResult;
 
 	}
+	
 
 }
