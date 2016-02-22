@@ -1,0 +1,37 @@
+Code Reviewer: Srikanth Tadisetty 
+
+Code Review for: Dan Thagard (Log(x))
+
+1. For calculateE() method
+	- Change method name from calculateE() ----> E() or simply rename the static variable E_NUMBER ---> E
+	Reference:	https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html
+	- set dResult =1;
+	- dResult +=1/factorial; 
+	- return dResult;
+	//Simply to maintain consistency to specify which type of result outputs among all team members. 
+	
+2. For ln() Method
+	- Add dInput and/or specific what kind of input it is exactly (change in JavaDoc accordingly).
+	- Also for result --> sum and return possibly strictly dResult, which is dResult = floor + sum.
+
+3. For powerOfInt() method
+	- Input should have type association (double dBase, int iExp)
+	- Change result ---> dResult so as to return either dResult or 1/dResult
+	//Simply to maintain consistency to specify which type of result outputs among all team members.
+	- Make changes to the JavaDoc as such.
+
+Notes:
+Possibly put ln() method at the end so as to first put in accessory methods first in class.  Simply to keep ordering.
+General test with comparison to Math.Log and results were good. Methods are functional.
+
+My Result:2.3025850929940455
+My Result:NaN
+My Result:4.0943445622221
+My Result:4.60517018598809
+---------------------------------
+Java Result:2.302585092994046
+Java Result:NaN
+Java Result:4.0943445622221
+Java Result:4.605170185988092
+	
+
