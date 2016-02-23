@@ -31,7 +31,7 @@ public class Transfunction {
         // handle floating-point numbers by default
         double tempSum = dResult % 1.0;
         if (tempSum > 0.99999){
-            dResult = dResult - tempSum + 1;;
+            dResult = dResult - tempSum + 1;
         }
         else if (tempSum < 1e-6) {
             dResult -= tempSum;
