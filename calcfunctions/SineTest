@@ -1,0 +1,20 @@
+package calculatorfunction;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class sineTest {
+	@Test
+	public void sineTest() {
+			double errorTolerance = 1e-5; 
+			double testNumber0 = Math.PI;
+			double testNumber1 = 0;
+
+			assertEquals(Math.sin(testNumber0), Functions.sine(testNumber0),
+					errorTolerance);
+			
+			assertEquals(Math.sin(testNumber1), Functions.sine(testNumber1),
+					errorTolerance);
+	}
+}
