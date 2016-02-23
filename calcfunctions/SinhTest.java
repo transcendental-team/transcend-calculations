@@ -6,8 +6,8 @@ import org.junit.Test;
 
 public class SinhTest {
 	@Test
-	public void sqrtTest() {
-			double errorTolerance = 1e-5; // still wouldn't fail
+	public void sinhTest() {
+			double errorTolerance = 1e-5;
 			double testNumber0 = Math.PI;
 			double testNumber1 = 0;
 
