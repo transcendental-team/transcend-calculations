@@ -99,20 +99,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String expression = expressionText.getText().toString();
         if (needClear && (
                 btn.getText().equals("0")
-                        || btn.getText().equals("1")
-                        || btn.getText().equals("2")
-                        || btn.getText().equals("3")
-                        || btn.getText().equals("4")
-                        || btn.getText().equals("5")
-                        || btn.getText().equals("6")
-                        || btn.getText().equals("7")
-                        || btn.getText().equals("8")
-                        || btn.getText().equals("9")
-                        || btn.getText().equals("."))
+                || btn.getText().equals("1")
+                || btn.getText().equals("2")
+                || btn.getText().equals("3")
+                || btn.getText().equals("4")
+                || btn.getText().equals("5")
+                || btn.getText().equals("6")
+                || btn.getText().equals("7")
+                || btn.getText().equals("8")
+                || btn.getText().equals("9")
+                || btn.getText().equals("."))
                 || btn.getText().equals("error")) {
             expressionText.setText("");
+            resultText.setText("");
             needClear = false;
         }
+
+        if (!isEmpty(resultText.getText().toString()) && (
+                btn.getText().equals("+")
+                || btn.getText().equals("-")
+                || btn.getText().equals("×")
+                || btn.getText().equals("÷"))){
+            expressionText.setText(resultText.getText());
+            resultText.setText("");
+            needClear = false;
+        }
+
+
 
         if (btn.getText().equals("C")) {
             expressionText.setText("");
@@ -135,8 +148,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             expression = expression.replaceAll("÷", "/");
             expression = expression.replaceAll("√", "sqrt");
             resultText.setText(ExpressionParser.eval(expression));
+            needClear = true;   ///needClear = true;
+        }
+        else if (!isEmpty(resultText.getText().toString()) &&(
+                btn.getText().equals("sin")
+                        || btn.getText().equals("sinh")
+                        || btn.getText().equals("log")
+                        || btn.getText().equals("10^")
+                        || btn.getText().equals("√"))) {
+            expressionText.setText( btn.getText() + "(" + resultText.getText());
+            expressionText.setSelection(expressionText.getText().length());
+            resultText.setText("");
             needClear = false;
-        } else {
+        }
+        else {
             expressionText.setText(expressionText.getText() + "" + btn.getText());
             needClear = false;
         }
@@ -144,40 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-//        private String calculate (String exp){
-//            Interpreter bsh = new Interpreter();
-//            Number result = null;
-//            try {
-//                exp = filterExp(exp);
-//                result = (Number)bsh.eval(exp);
-//            } catch (EvalError e) {
-//                e.printStackTrace();
-//                needClear = true;
-//                return "error";
-//            }
-//            exp = result.doubleValue()+"";
-//            if(exp.endsWith(".0"))
-//                exp = exp.substring(0, exp.indexOf(".0"));
-//            return exp;
-//        }
-
-//    private String filterExp(String exp) {
-//        String num[] = exp.split("");
-//        String temp = null;
-//        int begin = 0, end = 0;
-//        for (int i = 1; i < num.length; i++) {
-//            temp = num[i];
-//            if (temp.matches("[+-/()*]")) {
-//                if (temp.equals(".")) continue;
-//                end = i - 1;
-//                temp = exp.substring(begin, end);
-//                if (temp.trim().length() > 0 && temp.indexOf(".") < 0)
-//                    num[i - 1] = num[i - 1] + ".0";
-//                begin = end + 1;
-//            }
-//        }
-//        return Arrays.toString(num).replaceAll("[\\[\\], ]", "");
-//    }
 
     private boolean isEmpty(String str) {
         return (str == null || str.trim().length() == 0);

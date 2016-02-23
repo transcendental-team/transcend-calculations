@@ -30,7 +30,15 @@ public class ExpressionParser {
             functionStack.clear();
 
             tokenize(infixExpression);    //Convert String expression to Queue of string tokens
-            return evaluateInfix(); //Evaluate expression using the token queue.
+            String resultTemp = evaluateInfix();
+            if ( resultTemp.indexOf('.') == resultTemp.length()-2 && resultTemp.charAt(resultTemp.length()-1) == '0') {
+                resultTemp = resultTemp.substring(0, resultTemp.indexOf('.'));
+            }
+            else if ( resultTemp.length() > 13 && resultTemp.indexOf('E') == -1)
+                resultTemp = resultTemp.substring(0,12);
+            else if ( resultTemp.indexOf('.') > 0 && resultTemp.length() > 13 && resultTemp.indexOf('E') > 0  )
+                resultTemp = resultTemp.substring(0,12)+resultTemp.substring(resultTemp.indexOf('E'),resultTemp.length());
+            return resultTemp; //Evaluate expression using the token queue.
         }
 
         /**
@@ -216,7 +224,7 @@ public class ExpressionParser {
                     break;
                 //SWITCH TO Functions.pow(a, b)
                 case '^':
-                    valueStack.push(Math.pow(a, b) + "");
+                    valueStack.push(Functions.pow10( b) + "");
                     break;
             }
             return;
@@ -227,11 +235,11 @@ public class ExpressionParser {
             double value = Double.parseDouble(strValue);
             //WILL CHANGE Math.x() to Functions.x to call our functions
             if (funcName.equals("sin")) {
-                valueStack.push(Math.sin(value) + "");
+                valueStack.push(Functions.sine(value) + "");
             } else if (funcName.equals("sqrt")) {
-                valueStack.push(Math.sqrt(value) + "");
+                valueStack.push(Functions.sqrt(value) + "");
             } else if (funcName.equals("log")) {
-                valueStack.push(Math.log(value) + "");
+                valueStack.push(Functions.ln(value) + "");
             } else if (funcName.equals("sinh")) {
                 valueStack.push(Math.sinh(value) + "");
             }
