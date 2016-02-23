@@ -69,7 +69,7 @@ public class Functions {
 		double pi = 0;
 		double sum = 1;
 		int i = 0;
-		while (abs(sum) > (1e-8)) {//best approximation with 1e-8
+		while (abs(sum) > (1e-6)) {//best approximation with 1e-8
 			sum = ((i % 2 == 0) ? 1 : -1) / (2 * i + 1.0); //sum of fractional elements
 			pi += sum;
 			i++;
@@ -206,7 +206,7 @@ public class Functions {
 		// handle floating-point numbers by default
 		double tempSum = dResult % 1.0;
 		if (tempSum > 0.99999){
-			dResult -= tempSum+1;
+			dResult = dResult - tempSum+1;
 		}
 		else if (tempSum < 1e-6) {
 			dResult -= tempSum;
