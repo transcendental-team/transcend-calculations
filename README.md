@@ -1,5 +1,8 @@
-# transcend-calculations
-Repository for COMP 5541 group calculator project
+
+##Runable code under folder calcfunctions named <b>Functions.java
+
+##Test cases under calcfunctions folder named <b>AllTests.java
+
 
 
 ##sinh(x) Implementation:
