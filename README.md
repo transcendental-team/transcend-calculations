@@ -1,7 +1,7 @@
 
-Runable code under folder calcfunctions named <b>Functions.java
+Runable code under folder calcfunctions named <b>Functions.java<b>
 
-Test cases under calcfunctions folder named <b>AllTests.java
+Test cases under calcfunctions folder named <b>AllTests.java<b>
 
 
 
