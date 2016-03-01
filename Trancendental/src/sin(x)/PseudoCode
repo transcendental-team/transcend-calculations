@@ -10,7 +10,7 @@ factorial ← 1
 
 Perform n iterations of the Taylor Series Maclaurin Expansion: 
 
-For i to n interations:
+For i to n iterations:
 
 	Calculate denominator at each iterations:
 	factorial ←factorial*( (2 * i + 2) * (2 * i + 3))
