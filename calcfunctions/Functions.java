@@ -114,11 +114,6 @@ public class Functions {
 			expansionOrder += 1;
 			elementInSeries *= dRadian / expansionOrder ;
 
-			expansionOrder = expansionOrder+1;
-			elementInSeries = elementInSeries * dRadian / expansionOrder ;
-			expansionOrder = expansionOrder + 1;
-			elementInSeries = elementInSeries * dRadian / expansionOrder ;
-
 			// validate if summation is exceed the limits.
 			if (summationOfElements > Double.MAX_VALUE) {
 				System.out.println("Too Large");
