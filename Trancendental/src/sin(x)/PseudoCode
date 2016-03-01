@@ -2,7 +2,7 @@ Algorithm sine(x):
 //Pre-condition: User inputs value in Radians
 //Post-condition: The sine of the user input Radians in returned 
 Convert Radians to an angle between -2π and 2π:
-x  ←x%2 π;
+x  ←x%(2π);
 
 Initialize first term of the series and denominator: 
 result ← x
@@ -16,7 +16,7 @@ For i to n interations:
 	factorial ←factorial*( (2 * i + 2) * (2 * i + 3))
 
 	Calculate numerator at each iterations:
-	x ←x* x2;
+	x ←x*x^2;
 
 	if i is even:  
 	result ← result – x/factorial
