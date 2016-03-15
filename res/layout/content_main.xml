@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,19 +17,30 @@
 
         <EditText
             android:id="@+id/text1"
+            android:inputType="phone"
+            android:digits="123456790.+-*/.()"
+            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="0dp"
             android:layout_weight="1"
-            android:padding="0dp" />
+            android:padding="0dp"
+            android:textSize="55dp"
+            android:textAlignment="viewEnd"
+            android:ellipsize="end"
+            android:singleLine="true"/>
 
-        <EditText
+        <TextView
             android:id="@+id/text2"
+            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="0dp"
             android:layout_weight="1"
-            android:padding="0dp" />
+            android:padding="0dp"
+            android:textSize="30dp"
+            android:textAlignment="viewEnd" /> <!--android:singleLine="true"-->
+
 
     </LinearLayout>
 
@@ -40,7 +52,7 @@
         android:baselineAligned="false">
 
         <TableLayout
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:orientation="vertical" >
@@ -206,8 +218,8 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2">
+                android:layout_height="fill_parent"
+                android:layout_weight="0.14">
 
                 <Button
                     android:id="@+id/point_button"
@@ -258,7 +270,8 @@
                 android:layout_weight="0.25"
                 android:background="#ffa500"
                 android:text="C"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:layout_width="fill_parent" />
 
             <Button
                 android:id="@+id/divide_button"
@@ -321,6 +334,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_weight="0.25"
                 android:background="#333333"
+                tools:context=".MainActivity"
                 android:text="sin"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
