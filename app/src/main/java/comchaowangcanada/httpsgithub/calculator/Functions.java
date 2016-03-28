@@ -59,21 +59,32 @@ public class Functions {
         return num;
     }
 
-    /**
-     * Calculate pi using Leibniz formula.
-     * @see https://goparallel.sourceforge.net/calculate-pi-with-custom-c-class/
-     * @return the constant pi
+    /**method pi approximation using Bailey–Borwein–Plouffe formula
+     * In 1997, David H. Bailey, Peter Borwein and Simon Plouffe published
+     * (Bailey, 1997) on a new formula for π as an infinite series:
+     * pi = sum(k 0-->infinity)
+     * 		((1.0/16^k)*(4.0/(8*k+1)-2.0/(8*k+4)-1.0/(8*k+5)-1.0 /(8*k+6)));
+     * @chao wang
+     * @version 2
+     * @see https://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula
+     * @return result of pi
      */
-    private final static double calculatePi() {
-        double pi = 0;
-        double sum = 1;
+    private static double calculatePi() {
+        double  sum = 0;
+        double precision = 1e-15;
+        double elem = 0.0;
+        double dResult=0; // dResult is the output result
         int i = 0;
-        while (abs(sum) > (1e-6)) {//best approximation with 1e-8
-            sum = ((i % 2 == 0) ? 1 : -1) / (2 * i + 1.0); //sum of fractional elements
-            pi += sum;
+        do{
+            elem = ((1.0 / powerOfInt(16,i))
+                    * (4.0 / (8 * i + 1) - 2.0 / (8 * i + 4)
+                    - 1.0 / (8 * i + 5) - 1.0 / (8 * i + 6)));
+            sum += elem;
             i++;
-        }
-        return pi * 4;
+        }while (elem > precision);
+
+        dResult = sum;
+        return dResult;
     }
 
 

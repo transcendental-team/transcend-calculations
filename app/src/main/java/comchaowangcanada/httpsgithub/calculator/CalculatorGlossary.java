@@ -12,6 +12,13 @@ public class CalculatorGlossary {
                               "the exponential of 10 for value X",
                               "Square root."};
 
+     static final int ExtraLargeTextSize = 55;
+     static final int LargeTextSize = 45;
+     static final int LargeMediumTextSize = 35;
+     static final int MediumTextSize = 30;
+     static final int MediumSmallTextSize = 25;
+     static final int SmallTextSize = 20;
+
 
 
 }

@@ -32,6 +32,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Button btnEqual = null;
     private Button btnLeftBracket = null;
     private Button btnRightBracket = null;
+    private Button btnAbsolute = null;
+    private Button btnHistory  = null;
+    private Button btnDegRad = null;
+    private Button btnPi = null;
+    private Button btnEuler = null;
+    private Button btnFactorial = null;
+    private Button btnFraction = null;
+    private Button btnPercentage = null;
+    private Button btnSign = null;
     private String lastCommand = null;
     private boolean needClear;
     boolean isResultString ;
@@ -65,7 +74,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //link arithmetic operator button
         btnArithmetic[0] = (Button) findViewById(R.id.plus_button);
         btnArithmetic[1] = (Button) findViewById(R.id.minus_button);
-        btnArithmetic[2] = (Button) findViewById(R.id.produce_button);
+        btnArithmetic[2] = (Button) findViewById(R.id.product_button);
         btnArithmetic[3] = (Button) findViewById(R.id.divide_button);
 
         //link transcendental operator button
@@ -94,7 +103,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnEqual = (Button) findViewById(R.id.equal_button);
         btnLeftBracket = (Button) findViewById(R.id.leftBracket_button);
         btnRightBracket = (Button) findViewById(R.id.rightBracket_button);
-
+        btnPercentage = (Button) findViewById(R.id.percentage_button);
+        btnAbsolute = (Button) findViewById(R.id.abs_button);
+        btnHistory  = (Button) findViewById(R.id.history_button);
+        btnDegRad = (Button) findViewById(R.id.deg_button);
+        btnPi = (Button) findViewById(R.id.pi_button);
+        btnEuler = (Button) findViewById(R.id.euler_button);
+        btnFactorial = (Button) findViewById(R.id.factorial_button);
+        btnFraction = (Button) findViewById(R.id.fraction_button);
+        btnPercentage = (Button) findViewById(R.id.percentage_button);
+        btnSign = (Button) findViewById(R.id.sign_button);
 
         for (Button bc : btnArithmetic) {
             bc.setOnClickListener(this);
@@ -125,6 +143,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnLeftBracket.setOnClickListener(this);
         btnRightBracket.setOnClickListener(this);
         btnClear.setOnClickListener(this);
+        btnAbsolute.setOnClickListener(this);
+        btnHistory.setOnClickListener(this);
+        btnDegRad.setOnClickListener(this);
+        btnPi.setOnClickListener(this);
+        btnEuler.setOnClickListener(this);
+        btnFactorial.setOnClickListener(this);
+        btnFraction.setOnClickListener(this);
+        btnPercentage.setOnClickListener(this);
+        btnSign.setOnClickListener(this);
     }
 
     public void clicked(View view, int index ){
@@ -138,7 +165,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         // deal with error message clean out
         if(isResultString){
-            resultText.setTextSize(30);
+            resultText.setTextSize(CalculatorGlossary.LargeMediumTextSize);
             expressionText.setText("");
             resultText.setText("");
             isResultString = false;
@@ -147,11 +174,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // deal with autosize expression
         if (expressionText.length() > 10){
             if (  expressionText.getTextSize() >= 135 )
-                expressionText.setTextSize(45);
+                expressionText.setTextSize(CalculatorGlossary.LargeTextSize);
             if (expressionText.length() > 13){
-                expressionText.setTextSize(35);
+                expressionText.setTextSize(CalculatorGlossary.LargeMediumTextSize);
                     if (expressionText.length() > 17){
-                            expressionText.setTextSize(25);
+                            expressionText.setTextSize(CalculatorGlossary.MediumSmallTextSize);
                         }
                 }
         }
@@ -169,10 +196,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 || btn.getText().equals("7")
                 || btn.getText().equals("8")
                 || btn.getText().equals("9")
-                || btn.getText().equals("."))) {
+                || btn.getText().equals(".")
+                || btn.getText().equals("π")
+                || btn.getText().equals("e"))) {
             expressionText.setText("");
             resultText.setText("");
-            expressionText.setTextSize(55);
+            expressionText.setTextSize(CalculatorGlossary.ExtraLargeTextSize);
             needClear = false;
         }
 
@@ -180,7 +209,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // clean out button
         if (btn.getText().equals("C")) {
             expressionText.setText("");
-            expressionText.setTextSize(55);
+            expressionText.setTextSize(CalculatorGlossary.ExtraLargeTextSize);
             resultText.setText("");
             needClear = false;
         }
@@ -189,7 +218,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // empty expression has nothing to delete
             if (isEmpty(expression)) {
                 expressionText.setText("");
-                expressionText.setTextSize(55);
+                expressionText.setTextSize(CalculatorGlossary.ExtraLargeTextSize);
                 return;
             }// delete the one previous item before cursor.
             else {
@@ -208,9 +237,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
             expression = expression.replaceAll("×", "*");
             expression = expression.replaceAll("÷", "/");
             expression = expression.replaceAll("√", "sqrt");
+            expression = expression.replaceAll("%", "/100");
+
+
+            expressionText.setText(closeOpenBracket(expressionText.getText().toString()));
+            expressionText.setSelection(expressionText.getText().length());
+
+            expression = closeOpenBracket(expression);
             resultText.setText(ExpressionParser.eval(expression));
+            // if return result is an error message
             if(  resultText.getText().toString().matches(".*[a-z]+.*")){
-                resultText.setTextSize(20);
+                resultText.setTextSize(CalculatorGlossary.SmallTextSize);
                 isResultString = true;
             }
             needClear = true;
@@ -223,32 +260,75 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             || btn.getText().equals("sinh")
                             || btn.getText().equals("log")
                             || btn.getText().equals("10^")
-                            || btn.getText().equals("√"))) {
-                expressionText.setText(btn.getText() + "(" + resultText.getText());
+                            || btn.getText().equals("√")
+                            || btn.getText().equals("abs"))) {
+                expressionText.setTextSize(CalculatorGlossary.LargeMediumTextSize);
+                expressionText.setText(btn.getText().toString() + "(" + resultText.getText());
                 expressionText.setSelection(expressionText.getText().length());
-                expressionText.setTextSize(35);
                 resultText.setText("");
             }
-            // if result text has no value, will add transcendental operator + ( | )
+            // if result text has no value, will add transcendental operator + ( |
             else if(isEmpty(resultText.getText().toString()) &&(
                     btn.getText().equals("sin")
                             || btn.getText().equals("sinh")
                             || btn.getText().equals("log")
                             || btn.getText().equals("10^")
-                            || btn.getText().equals("√"))){
+                            || btn.getText().equals("√")
+                            || btn.getText().equals("abs"))){
                 int cursorPosition = expressionText.getSelectionStart();
-                expressionText.setText(expressionText.getText().toString().substring(0, cursorPosition) + btn.getText() + "()"
-                        + expressionText.getText().toString().substring(cursorPosition, expressionText.getText().toString().length()));
-                expressionText.setSelection(cursorPosition + btn.getText().length() + 1);
+                expressionText.setText(expressionText.getText().toString().substring(0, cursorPosition) + btn.getText().toString()
+                        + "(" + expressionText.getText().toString().substring(cursorPosition, expressionText.getText().toString().length()));
+                expressionText.setSelection(cursorPosition + removeFractionX(btn.getText().toString()).length() + 1);
+            }
+            // if result text has value, will add "(1/ " bring result from result text to expression test
+            else if (!isEmpty(resultText.getText().toString()) &&(btn.getText().equals("1/x"))) {
+                expressionText.setTextSize(CalculatorGlossary.LargeMediumTextSize);
+                expressionText.setText("(" + removeFractionX(btn.getText().toString()) + resultText.getText());
+                expressionText.setSelection(expressionText.getText().length());
+                resultText.setText("");
+            }
+            // if result text has no value, will add transcendental operator + ( |
+            else if(isEmpty(resultText.getText().toString()) &&( btn.getText().equals("1/x"))){
+                int cursorPosition = expressionText.getSelectionStart();
+                expressionText.setText(expressionText.getText().toString().substring(0, cursorPosition) + "("
+                            + removeFractionX(btn.getText().toString())
+                            + expressionText.getText().toString().substring(cursorPosition, expressionText.getText().toString().length()));
+                expressionText.setSelection(cursorPosition + removeFractionX(btn.getText().toString()).length() + 1);
+            }
+            // if result text has no value,  add +/- operator before recent value such as  -(88
+            else if(isEmpty(resultText.getText().toString()) &&(
+                             btn.getText().equals("+/-"))){
+                int tempExpressionLength = expressionText.getText().length();
+                int cursorPosition = expressionText.getSelectionStart();
+                expressionText.setText(putNegativeSign(expressionText.getText().toString(), cursorPosition));
+                if(expressionText.getText().length() > tempExpressionLength) {
+                    expressionText.setSelection(cursorPosition + btn.getText().length() - 1);
+                }
+                if(expressionText.getText().length() < tempExpressionLength) {
+                    expressionText.setSelection(cursorPosition - btn.getText().length() + 1);
+                }
+            }
+            // if result text has  value, add +/- operator will negates the value from result. and clean out the ExpressionText
+            else if(!isEmpty(resultText.getText().toString()) &&(
+                            btn.getText().equals("+/-"))){
+                String resultString = resultText.getText().toString();
+                if (resultString.charAt(0) == '-'){
+                    resultText.setText(resultString.substring(1,resultString.length()));
+                }
+                if (resultString.charAt(0) >= '0' && resultString.charAt(0) <= '9' ){
+                    resultText.setText("-"+resultString);
+                }
+                expressionText.setText("");
             }
             // if result txt has value, and next input is operator,  bring result from result text to expression test, then add operator
             else if (!isEmpty(resultText.getText().toString()) && (
                     btn.getText().equals("+")
                             || btn.getText().equals("-")
                             || btn.getText().equals("×")
-                            || btn.getText().equals("÷"))){
-                expressionText.setText(resultText.getText() + btn.getText().toString());
-                expressionText.setTextSize(35);
+                            || btn.getText().equals("÷")
+                            || btn.getText().equals("x!"))){
+                expressionText.setText(resultText.getText() + removeFractionX(btn.getText().toString()));
+                expressionText.setTextSize(CalculatorGlossary.LargeMediumTextSize);
                 expressionText.setSelection(expressionText.getText().length());
                 resultText.setText("");
                 needClear = false;
@@ -256,15 +336,59 @@ public class MainActivity extends Activity implements View.OnClickListener {
             // if user enter any arithmetic operator or number, cursor moves the new item length
             else {
                 int cursorPosition = expressionText.getSelectionStart();
-                expressionText.setText(expressionText.getText().toString().substring(0, cursorPosition) + btn.getText()
+                expressionText.setText(expressionText.getText().toString().substring(0, cursorPosition) + removeFractionX(btn.getText().toString())
                         + expressionText.getText().toString().substring(cursorPosition, expressionText.getText().toString().length()));
-                expressionText.setSelection(cursorPosition + btn.getText().length());
+                expressionText.setSelection(cursorPosition + removeFractionX(btn.getText().toString()).length());
             }
             needClear = false;
         }
     }
 
+    private String closeOpenBracket(String str){
+        int bracketDifference= countCharInString(str, '(') - countCharInString(str, ')');
 
+        for (int i = 0; i < bracketDifference; i++)
+            str += ')';
+
+        return str;
+    }
+
+    private int countCharInString (String str, char cha){
+        int distinct = 0;
+        for (int i = 0; i < str.length(); i++){
+            if(str.charAt(i) == cha)
+                distinct++;
+        }
+        return distinct;
+    }
+
+    private String putNegativeSign(String str, int index){
+        String strManipulation = str;
+        int currentIndex = index;
+        char[] charArray = strManipulation.toCharArray();
+        if (charArray.length == 0){
+            strManipulation = "(-" + strManipulation;
+        }
+        else{
+            while ( (currentIndex != 0) && (charArray[currentIndex-1] >= '0' && charArray[currentIndex-1] <= '9') ){
+                currentIndex --;
+            }
+            if (currentIndex == 0){
+                strManipulation = "(-" + strManipulation;
+            }
+            else if (charArray[currentIndex-1] == '-' && charArray[currentIndex-2] == '('){
+                strManipulation = strManipulation.substring(0, currentIndex-2) + strManipulation.substring(currentIndex, charArray.length);
+            }
+            else {
+                strManipulation = strManipulation.substring(0,currentIndex) + "(-" + strManipulation.substring(currentIndex , charArray.length );
+            }
+        }
+        return strManipulation;
+    }
+
+    private String removeFractionX(String str){
+            return str.replace("x","");
+    }
 
     private boolean isEmpty(String str) {
         return (str == null || str.trim().length() == 0);

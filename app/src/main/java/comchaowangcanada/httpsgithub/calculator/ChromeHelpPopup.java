@@ -2,7 +2,6 @@ package comchaowangcanada.httpsgithub.calculator;
 
 /**
  * Created by Chao on 23/02/2016.
- * Ref http://shardulprabhu.blogspot.ca/2012/08/blog-post_29.html
  */
         import android.content.Context;
         import android.graphics.Rect;
