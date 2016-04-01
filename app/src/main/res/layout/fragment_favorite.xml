@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    tools:context="comchaowangcanada.httpsgithub.navigationdrawerpractice.FavoriteFragment">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="510dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom" >
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/favorite_listView"
+            android:layout_width="wrap_content"
+            android:background="#FFFFFF"
+            android:layout_height="match_parent"
+            android:minHeight="50dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
