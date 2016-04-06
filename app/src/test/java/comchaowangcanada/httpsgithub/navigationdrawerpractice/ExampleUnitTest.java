@@ -1,4 +1,4 @@
-package comchaowangcanada.httpsgithub.navigationdrawerpractice;
+package comchaowangcanada.httpsgithub.calculator;
 
 import org.junit.Test;
 

@@ -4,10 +4,11 @@ package comchaowangcanada.httpsgithub.calculator;
  * Created by Transcendental Team.
  * Author Daniel Thagard
  */
+
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class ExpressionParser {
     private static Queue<String> tokenQueue = new LinkedList<String>();	//A queue for tokens of expression

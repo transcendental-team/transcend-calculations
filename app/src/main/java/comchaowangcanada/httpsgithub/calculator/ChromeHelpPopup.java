@@ -3,23 +3,20 @@ package comchaowangcanada.httpsgithub.calculator;
 /**
  * Created by Chao on 23/02/2016.
  */
-        import android.content.Context;
-        import android.graphics.Rect;
-        import android.graphics.drawable.BitmapDrawable;
-        import android.graphics.drawable.Drawable;
-        import android.text.method.ScrollingMovementMethod;
-        import android.view.Gravity;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.ViewGroup.LayoutParams;
-        import android.view.WindowManager;
-        import android.view.animation.AnimationUtils;
-        import android.widget.ImageView;
-        import android.widget.PopupWindow;
-        import android.widget.TextView;
 
-        import comchaowangcanada.httpsgithub.calculator.MainActivity;
+import android.content.Context;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 public class ChromeHelpPopup {
 
