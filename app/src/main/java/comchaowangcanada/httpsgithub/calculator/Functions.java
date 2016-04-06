@@ -184,20 +184,29 @@ public class Functions {
         return floor + dResult;
     }
 
-
     /**
      * Power function of 10 using Taylor expansion
      * @param dInput input value
      * @return Power function of 10 value
      */
     public static double pow10(double dInput){
+    	/* First apply range reduction:
+    	 * if input x contains a decimal:
+    	 * 10^(x) = 10^floor(x) * 10^(x-floor(x))
+    	 */
+    	int floor = (int)dInput;
+    	double powFloor = powerOfInt(10, floor);
+    	if (dInput == floor){
+    		return powFloor;
+    	}
+    	dInput -= floor;    	
 
         double dResult = 1.0;
         double term = 1.0;
         double xln10 = dInput * Functions.ln(10.0);
 
-        if (dInput<0){
-            return 1 / pow10(-dInput);
+        if (dInput < 0){
+            return (1 / pow10(-dInput)) * powFloor;
         }
 
         // apply Taylor series until getting the desired accuracy
@@ -216,7 +225,7 @@ public class Functions {
         else if (tempSum < 1e-6) {
             dResult -= tempSum;
         }
-        return dResult;
+        return dResult * powFloor;
     }
 
 
