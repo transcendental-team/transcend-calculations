@@ -1,14 +1,7 @@
-package comchaowangcanada.httpsgithub.calculator;
-
-/**
- * Created by Transcendental Team.
- * Author Daniel Thagard
- */
-
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Queue;
+import java.util.LinkedList;
 
 public class ExpressionParser {
     private static Queue<String> tokenQueue = new LinkedList<String>();	//A queue for tokens of expression
@@ -106,7 +99,12 @@ public class ExpressionParser {
                 String leftBracket = opStack.pop();	// remove corresponding left bracket from opStack
                 //if there was a function outside of the brackets
                 if (leftBracket.equals("@")){
-                    callFunction(functionStack.pop(), valueStack.pop());
+                	if (!valueStack.isEmpty()){
+                		callFunction(functionStack.pop(), valueStack.pop());
+                	}
+                	else {
+                		return "Invalid input. The function must take a value.";
+                	}
                 }
                 //If there's a number directly before brackets with no * sign, multiply it.
                 else if (!numPreBracket.equals("")){
@@ -171,8 +169,11 @@ public class ExpressionParser {
         if (resultTemp == null){   // If no operands have been entered
             return "Invalid expression. Please try again.";
         }
-        else if(resultTemp.matches("NaN|Infinity")){
+        else if(resultTemp.matches("NaN")){
             return "Invalid expression. Make sure that you are not performing any illegal operations.";
+        }
+        else if(resultTemp.matches("Infinity|-Infinity")){
+            return "The result is out of range.";
         }
         else if(!valueStack.isEmpty()){
             return "Invalid expression. You may have forgotten to add an operator";
