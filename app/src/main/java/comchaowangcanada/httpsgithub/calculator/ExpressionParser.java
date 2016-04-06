@@ -1,3 +1,8 @@
+package comchaowangcanada.httpsgithub.calculator;
+/**
+ * Created by Transcendental Team.
+ * Author Daniel Thagard
+ */
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Queue;
@@ -59,21 +64,18 @@ public class ExpressionParser {
      * @return result of infix expression
      */
     private static String evaluateInfix(){
-        String numPreBracket = ""; //keep track if a number is before a left bracket
-        double nextValue;
-        double lastValue;
+    	String token; //The current token removed from token queue.
+        double nextValue; //The next operand in the opStack parsed as a double
 
         //Classify the tokens as operators, functions or operands, and begin evaluating
         while(!tokenQueue.isEmpty()){
-            String token = tokenQueue.remove();
+            token = tokenQueue.remove();
             //If token is a valid double
             if (token.matches("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")){
-                if (!tokenQueue.isEmpty() && tokenQueue.peek().equals("(")){
-                    numPreBracket = token; //enable multiplication with brackets
+                if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(")){
+                    opStack.push("*"); //enable multiplication with brackets
                 }
-                else{
-                    valueStack.push(token);
-                }
+                valueStack.push(token);
             }
             //If token is a valid operator
             else if(token.matches("sin|log|sqrt|sinh")){
@@ -106,12 +108,7 @@ public class ExpressionParser {
                 		return "Invalid input. The function must take a value.";
                 	}
                 }
-                //If there's a number directly before brackets with no * sign, multiply it.
-                else if (!numPreBracket.equals("")){
-                    lastValue = Double.parseDouble(valueStack.pop());
-                    valueStack.push(Double.parseDouble(numPreBracket)*lastValue + "");
-                    numPreBracket = "";
-                }
+                
                 //If there's a number directly after then brackets with no * sign, multiply!
                 if (!tokenQueue.isEmpty()
                         && tokenQueue.peek().matches("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")){
@@ -121,7 +118,7 @@ public class ExpressionParser {
                 //If a left bracket follows, set so the values enclosed in brackets will be multiplied
                 else if (!tokenQueue.isEmpty()
                         && tokenQueue.peek().equals("(")){
-                    numPreBracket = valueStack.pop();
+                	opStack.push("*");
                 }
 
             }
