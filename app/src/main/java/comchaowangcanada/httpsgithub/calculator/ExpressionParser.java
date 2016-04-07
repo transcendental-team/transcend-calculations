@@ -79,7 +79,7 @@ public class ExpressionParser {
             }
             //If token is a valid operator
             else if(token.matches("sin|log|sqrt|sinh")){
-                if (!tokenQueue.isEmpty() & tokenQueue.peek().equals("(")){
+                if (!tokenQueue.isEmpty() && tokenQueue.peek().equals("(")){
                     tokenQueue.remove();
                     opStack.push("@");
                 }
