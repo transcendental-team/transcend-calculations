@@ -4,7 +4,7 @@
 ![screenshot_menu_small](https://cloud.githubusercontent.com/assets/15674468/14340181/ef4011b0-fc39-11e5-85b8-f0cbfd77594d.png)         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  ![screenshot_calculator_small](https://cloud.githubusercontent.com/assets/15674468/14340220/376d3850-fc3a-11e5-9a23-c9b230e1abd4.png)
 ***
 ### Feature
-* **quick add to favorite list**  <br>
+* **Quick add to favorite list**  <br>
 ![quickaddtofavorite_small](https://cloud.githubusercontent.com/assets/15674468/14340297/e1797b74-fc3a-11e5-906a-cedc5ebe1b01.gif)
 * **Editable Expression Text**  <br>
 ![editabletext_small](https://cloud.githubusercontent.com/assets/15674468/14340315/09c1eb2a-fc3b-11e5-8233-61cde1e20776.gif)
