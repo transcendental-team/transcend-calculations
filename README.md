@@ -1,7 +1,7 @@
 # Calculator Prototype 
 
 ## User Interface 
-![screenshot_menu_small](https://cloud.githubusercontent.com/assets/15674468/14340181/ef4011b0-fc39-11e5-85b8-f0cbfd77594d.png)         &nbsp;&nbsp;&nbsp;<br> ![screenshot_calculator_small](https://cloud.githubusercontent.com/assets/15674468/14340220/376d3850-fc3a-11e5-9a23-c9b230e1abd4.png)
+![screenshot_menu_small](https://cloud.githubusercontent.com/assets/15674468/14340181/ef4011b0-fc39-11e5-85b8-f0cbfd77594d.png)         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  ![screenshot_calculator_small](https://cloud.githubusercontent.com/assets/15674468/14340220/376d3850-fc3a-11e5-9a23-c9b230e1abd4.png)
 
 ***
 ### Button 
