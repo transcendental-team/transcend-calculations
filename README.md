@@ -17,7 +17,7 @@
 * **Favorite List Management**  <br>
 ![favoritelist_medium](https://cloud.githubusercontent.com/assets/15674468/14356801/17649c90-fc9b-11e5-9c6f-686beaaf6d3d.gif)
 * **History List Management**  <br>
-![historylist_medium](https://cloud.githubusercontent.com/assets/15674468/14356791/148f4cc2-fc9b-11e5-8dc6-603e2adab18d.gif)
+![historylist_medium](https://cloud.githubusercontent.com/assets/15674468/14357335/2480fc5a-fc9d-11e5-90b6-e4ae1c0ecc51.gif)
 
 ***
 ### Button 
