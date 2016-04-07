@@ -5,11 +5,11 @@
 ***
 ### Feature
 * **Quick add to favorite list**  <br>
-![quickaddtofavorite_small](https://cloud.githubusercontent.com/assets/15674468/14340297/e1797b74-fc3a-11e5-906a-cedc5ebe1b01.gif)
+![quickaddtofavorite](https://cloud.githubusercontent.com/assets/15674468/14356500/fce78bda-fc99-11e5-9214-1ca139ccf3b5.gif)
 * **Editable Expression Text**  <br>
-![editabletext_small](https://cloud.githubusercontent.com/assets/15674468/14340315/09c1eb2a-fc3b-11e5-8233-61cde1e20776.gif)
+![editabletext](https://cloud.githubusercontent.com/assets/15674468/14356512/062edf18-fc9a-11e5-9b9a-c84bd4364576.gif)
 * **Auto Size Expression Text**  <br>
-![autosize_small](https://cloud.githubusercontent.com/assets/15674468/14340321/1fafb854-fc3b-11e5-9afb-3d52aa53bad6.gif)
+![autosize text](https://cloud.githubusercontent.com/assets/15674468/14356518/0db00bb8-fc9a-11e5-9cb6-19b972623462.gif)
 * **Memory Slot to save expression result: short press to add, long press to remove**  <br>
 ![memoryslot_small](https://cloud.githubusercontent.com/assets/15674468/14340330/3229103e-fc3b-11e5-92d0-b118ee6d9687.gif)
 * **History key to quickly access history**  <br>
