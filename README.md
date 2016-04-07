@@ -5,19 +5,19 @@
 ***
 ### Feature
 * **Quick add to favorite list**  <br>
-![quickaddtofavorite](https://cloud.githubusercontent.com/assets/15674468/14356500/fce78bda-fc99-11e5-9214-1ca139ccf3b5.gif)
+![quickaddtofavorite_medium](https://cloud.githubusercontent.com/assets/15674468/14356752/f82c2cc6-fc9a-11e5-97fe-2c664b5eb15a.gif)
 * **Editable Expression Text**  <br>
-![editabletext](https://cloud.githubusercontent.com/assets/15674468/14356512/062edf18-fc9a-11e5-9b9a-c84bd4364576.gif)
+![editabletext_medium](https://cloud.githubusercontent.com/assets/15674468/14356758/0077a720-fc9b-11e5-81f0-8839c6ec0cda.gif)
 * **Auto Size Expression Text**  <br>
-![autosize text](https://cloud.githubusercontent.com/assets/15674468/14356518/0db00bb8-fc9a-11e5-9cb6-19b972623462.gif)
+![autosize text_medium](https://cloud.githubusercontent.com/assets/15674468/14356766/03b41edc-fc9b-11e5-8158-54a180ec5a4e.gif)
 * **Memory Slot to save expression result: short press to add, long press to remove**  <br>
-![memoryslot_small](https://cloud.githubusercontent.com/assets/15674468/14340330/3229103e-fc3b-11e5-92d0-b118ee6d9687.gif)
+![momoryslot_medium](https://cloud.githubusercontent.com/assets/15674468/14356775/09919b54-fc9b-11e5-909b-3cd775b2c047.gif)
 * **History key to quickly access history**  <br>
-![anshistoryaccess_small](https://cloud.githubusercontent.com/assets/15674468/14340369/98a6fe98-fc3b-11e5-9b49-f6abd2c57f8e.gif)
+![anshistoryaccess_medium](https://cloud.githubusercontent.com/assets/15674468/14356831/2977ec34-fc9b-11e5-9da6-28d6d9b9fa5c.gif)
 * **Favorite List Management**  <br>
-![favoritelist_small](https://cloud.githubusercontent.com/assets/15674468/14340377/b3615bb6-fc3b-11e5-9c86-4ffe5ce03c18.gif)
+![favoritelist_medium](https://cloud.githubusercontent.com/assets/15674468/14356801/17649c90-fc9b-11e5-9c6f-686beaaf6d3d.gif)
 * **History List Management**  <br>
-![historylist_small](https://cloud.githubusercontent.com/assets/15674468/14340387/cbbd4148-fc3b-11e5-92dd-d0467c39e955.gif)
+![historylist_medium](https://cloud.githubusercontent.com/assets/15674468/14356791/148f4cc2-fc9b-11e5-8dc6-603e2adab18d.gif)
 
 ***
 ### Button 
