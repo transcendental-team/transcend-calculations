@@ -103,7 +103,7 @@ public class Functions {
      * @param dRadian as the double input variable in radian
      * @return hyperbolic sine function value
      */
-    public static double sinh(double dRadian) throws Exception {
+    public static double sinh(double dRadian) {
         double percision = 0.00000000001;	// precision up to 10th digit after decimal point.
         double elementInSeries = dRadian;  //first expansion term is x/1!;
         double summationOfElements = 0.0;
