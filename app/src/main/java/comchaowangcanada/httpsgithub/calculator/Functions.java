@@ -57,7 +57,7 @@ public class Functions {
      * @param num negative or positive number.
      * @return the absolute value of the number
      */
-    private static double abs(double num) {
+    public static double abs(double num) {
         if (num < 0){
             return -num;
         }
