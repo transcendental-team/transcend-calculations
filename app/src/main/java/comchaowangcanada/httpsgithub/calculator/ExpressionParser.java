@@ -36,22 +36,46 @@ public class ExpressionParser {
      * @param infixExp
      */
     private static void tokenize(String infixExp){
+    	/* The "-" is overloaded to mean both minux and negative. 
+    	 * If the current character is "-", isNextNegative informs us
+    	 * whether "-" will represent a minux (and be added as an independent token,
+    	 * or a negative and be appended onto the following token..
+    	 */
+    	boolean isNextNegative = true;
+    	// Iterate through string, grouping characters into tokens
         for (int iter = 0; iter < infixExp.length(); iter++){
             String current = infixExp.charAt(iter) + "";
             if (!current.equals(" ")){		// Remove spaces from expression
+                // A "-" after a left bracket or at the beginning should be appended to the next value.
+            	if (current.equals("-") && isNextNegative == true){
+            		current = current + infixExp.charAt(++iter);
+            	}
                 //multi-digit double becomes one number. WON'T MATCH xE-4.
                 if (current.matches("[0-9[.]]")){
                     while((iter < (infixExp.length() - 1))
-                            &&(infixExp.charAt(iter+1) + "").matches("[0-9E[.]]")){
+                            &&(infixExp.charAt(iter+1) + "").matches("(-)?[0-9E[.]]")){
                         current = current + infixExp.charAt(++iter);
+                        //Facilitate scientific notation E-x
+                        if (current.substring(current.length() - 1).equals("E") &&
+                        		(infixExp.charAt(iter + 1) == '-')){
+                        	current = current + "-";
+                        	iter++;
+                        }
                     }
                 }
                 //multi letter tokens (transcendental functions) one token
-                else if(current.matches("[a-z]")){
+                else if(current.matches("(-)?[a-z]")){
                     while((iter < (infixExp.length() - 1))
                             && (infixExp.charAt(iter+1) + "").matches("[a-z]")){
                         current = current + infixExp.charAt(++iter);
                     }
+                }                
+                // If current is a left bracket, then a "-" that immediately follows is a negative sign. 
+                if (current.equals("(")){
+                	isNextNegative = true;
+                }
+                else{
+                	isNextNegative = false;
                 }
                 tokenQueue.add(current);
             }
@@ -80,14 +104,20 @@ public class ExpressionParser {
             }
             //If token is Euler's number
             else if (token.equals("e")){
+            	if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(")){
+                    opStack.push("*"); //enable multiplication with brackets
+            	}
             	valueStack.push(Functions.E_NUMBER + "");
             }
             //If token is Pi
             else if (token.equals("π")){
+            	if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(")){
+                    opStack.push("*"); //enable multiplication with brackets
+            	}
             	valueStack.push(Functions.PI + "");
             }
             //If token is a valid operator
-            else if(token.matches("sin|log|sqrt|sinh|abs")){
+            else if(token.matches("(-)?(sin|log|sqrt|sinh|abs)")){
                 if (!tokenQueue.isEmpty() && tokenQueue.peek().equals("(")){
                     tokenQueue.remove();
                     opStack.push("@");
@@ -97,11 +127,12 @@ public class ExpressionParser {
                 }
                 functionStack.push(token);
             }
-            else if (token.matches("[(@]")) {
+            else if (token.matches("(-)?[(@]")) {
                 opStack.push(token);
             }
             else if (token.equals(")")){
-                while (!opStack.isEmpty() && !opStack.peek().matches("[(@]")){
+                while (!opStack.isEmpty() && !opStack.peek().matches("(-)?[(@]")
+                		&& valueStack.size() > 1){
                     applyOperation();	// apply operation until left bracket reached
                 }
                 if(opStack.isEmpty()){ //If there is not corresponding left bracket.
@@ -116,6 +147,9 @@ public class ExpressionParser {
                 	else {
                 		return "Invalid input. The function must take a value.";
                 	}
+                }
+                else if (leftBracket.equals("-(")){
+                	valueStack.push(-Double.parseDouble(valueStack.pop()) + "");
                 }
                 
                 //If there's a number directly after then brackets with no * sign, multiply!
@@ -278,20 +312,24 @@ public class ExpressionParser {
     	// Parse the input as a double
         double value = Double.parseDouble(strValue);
         // Call the necessary function
-        if (funcName.equals("sin")){
+        if (funcName.matches("(-)?sin")){
             valueStack.push(Functions.sine(value) + "");
         }
-        else if (funcName.equals("sqrt")){
+        else if (funcName.matches("(-)?sqrt")){
             valueStack.push(Functions.sqrt(value) + "");
         }
-        else if (funcName.equals("log")){
+        else if (funcName.matches("(-)?log")){
             valueStack.push(Functions.ln(value) + "");
         }
-        else if (funcName.equals("sinh")){
+        else if (funcName.matches("(-)?sinh")){
             valueStack.push(Functions.sinh(value) + "");
         }
-        else if (funcName.equals("abs")){
+        else if (funcName.matches("(-)?abs")){
         	valueStack.push(Functions.abs(value) + "");
+        }
+        // If there is a leading "-", multiply result by negative one.
+        if (funcName.charAt(0) == '-'){
+        	valueStack.push(-Double.parseDouble(valueStack.pop()) + "");
         }
     }//End call function
 
