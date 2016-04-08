@@ -87,7 +87,7 @@ public class ExpressionParser {
             	valueStack.push(Functions.PI + "");
             }
             //If token is a valid operator
-            else if(token.matches("sin|log|sqrt|sinh")){
+            else if(token.matches("sin|log|sqrt|sinh|abs")){
                 if (!tokenQueue.isEmpty() && tokenQueue.peek().equals("(")){
                     tokenQueue.remove();
                     opStack.push("@");
@@ -289,6 +289,9 @@ public class ExpressionParser {
         }
         else if (funcName.equals("sinh")){
             valueStack.push(Functions.sinh(value) + "");
+        }
+        else if (funcName.equals("abs")){
+        	valueStack.push(Functions.abs(value) + "");
         }
     }//End call function
 
