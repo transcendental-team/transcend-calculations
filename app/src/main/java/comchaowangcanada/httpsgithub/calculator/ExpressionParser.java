@@ -1,9 +1,9 @@
 package comchaowangcanada.httpsgithub.calculator;
+
 /**
- * Created by Transcendental Team on 23/02/2016.
+ * Created by Transcendental Team.
  * Author Daniel Thagard
  */
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Queue;
@@ -258,7 +258,18 @@ public class ExpressionParser {
      * @param strValue is a string containing a floating point value to be evaluated
      */
     private static void callFunction(String funcName, String strValue){
+    	// Avoid calling functions with Infinity, -Infinity, and NaN as inputs
+    	if (strValue.matches("(-)?Infinity")){
+            valueStack.push("Infinity");
+            return;
+    	}
+    	if (strValue.matches("NaN")){
+            valueStack.push("NaN");
+            return;
+    	}
+    	// Parse the input as a double
         double value = Double.parseDouble(strValue);
+        // Call the necessary function
         if (funcName.equals("sin")){
             valueStack.push(Functions.sine(value) + "");
         }
