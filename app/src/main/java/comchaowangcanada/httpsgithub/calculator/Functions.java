@@ -1,8 +1,13 @@
 package comchaowangcanada.httpsgithub.calculator;
 
 /**
- * Created by Calculator Team on 22/02/2016.
+ *  Group G Function Implementations on 22/02/2016.
+ *  @author Srikanth, Eric, Chao, Dan, Xindi
+ *  Chao Wang  13/03/2016  Merge the branch to Enhance the calculatePi() method.
+ *  Daniel Thagard  06/04/2016  Update the pow10(x) method
+ *  Chao Wang  07/04/2016  Update the sinh(x) method to throw exception.
  */
+
 public class Functions {
 
     public static final double PI = calculatePi(); //Pi constant
@@ -64,7 +69,7 @@ public class Functions {
      * (Bailey, 1997) on a new formula for π as an infinite series:
      * pi = sum(k 0-->infinity)
      * 		((1.0/16^k)*(4.0/(8*k+1)-2.0/(8*k+4)-1.0/(8*k+5)-1.0 /(8*k+6)));
-     * @chao wang
+     * @Author chao wang
      * @version 2
      * @see https://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula
      * @return result of pi
@@ -98,7 +103,7 @@ public class Functions {
      * @param dRadian as the double input variable in radian
      * @return hyperbolic sine function value
      */
-    public static double sinh(double dRadian){
+    public static double sinh(double dRadian) throws Exception {
         double percision = 0.00000000001;	// precision up to 10th digit after decimal point.
         double elementInSeries = dRadian;  //first expansion term is x/1!;
         double summationOfElements = 0.0;
@@ -126,7 +131,7 @@ public class Functions {
 
             // validate if summation is exceed the limits.
             if (summationOfElements > Double.MAX_VALUE) {
-                System.out.println("Too Large");
+                // throw new Exception("The result is out of range.");
                 break;
             }
         }

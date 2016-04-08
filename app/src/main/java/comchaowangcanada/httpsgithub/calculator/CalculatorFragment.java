@@ -17,16 +17,21 @@ import android.widget.TextView;
 
 import java.util.Arrays;
 
-
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Transcendental Team on 23/02/2016.
+ * Author: Chao Wang
+ * Chao Wang  24/03/2016  Enhance the GUI
+ * Chao Wang  27/03/2016  Migrate from MainActivity to Calculator Fragment
+ * Chao Wang  06/04/2016  Modify the button, replace factorial button to Memory button.
  */
+
 public class CalculatorFragment extends Fragment implements View.OnClickListener {
 
     private Button[] btnNum = new Button[11];    //0-9 numer operand button and . button
     private Button[] btnArithmetic = new Button[4];  //4 arithmetic operand button
     private Button[] btnTranscendental = new Button[5];  //4 arithmetic operand button
-    private TextView informationText  = null;
+    private TextView drgText  = null;
+    private TextView mText  = null;
     private EditText expressionText = null;
     private TextView resultText = null;
     private Button btnClear = null;
@@ -39,7 +44,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     private Button btnDegRad = null;
     private Button btnPi = null;
     private Button btnEuler = null;
-    private Button btnFactorial = null;
+    private Button btnMemory = null;
     private Button btnFraction = null;
     private Button btnPercentage = null;
     private Button btnSign = null;
@@ -48,6 +53,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     boolean isResultString;
     boolean isRadian ;
     private int ansCount;
+    private String memorySlot;
 
 
     public CalculatorFragment() {
@@ -55,27 +61,33 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         isResultString = false;
         isRadian = true;
         ansCount = 0;
+        memorySlot = "";
     }
 
     public void setResultText (String str){
+
         resultText.setText(str);
     }
 
     public void setExpressionText (String str){
+
         expressionText.setText(str);
     }
 
     public void setExpressionTextSize (float size){
+
         expressionText.setTextSize(size);
     }
 
     public void setChkFavorite (boolean value){
+
         chkFavorite.setChecked(value);
     }
 
 
     @Override
     public void onResume() {
+
         super.onResume();
     }
 
@@ -87,7 +99,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
 
         //initialize display
-        informationText = (TextView) rootview.findViewById(R.id.informationText);
+        drgText = (TextView) rootview.findViewById(R.id.DRG_Text);
+        mText = (TextView) rootview.findViewById(R.id.memory_Text);
         expressionText = (EditText) rootview.findViewById(R.id.text1);
         resultText = (TextView) rootview.findViewById(R.id.text2);
 
@@ -129,7 +142,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         btnDegRad = (Button) rootview.findViewById(R.id.DRG_button);
         btnPi = (Button) rootview.findViewById(R.id.pi_button);
         btnEuler = (Button) rootview.findViewById(R.id.euler_button);
-        btnFactorial = (Button) rootview.findViewById(R.id.factorial_button);
+        btnMemory = (Button) rootview.findViewById(R.id.memory_button);
         btnFraction = (Button) rootview.findViewById(R.id.fraction_button);
         btnPercentage = (Button) rootview.findViewById(R.id.percentage_button);
         btnSign = (Button) rootview.findViewById(R.id.sign_button);
@@ -184,7 +197,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         btnDegRad.setOnClickListener(this);
         btnPi.setOnClickListener(this);
         btnEuler.setOnClickListener(this);
-        btnFactorial.setOnClickListener(this);
+        btnMemory.setOnClickListener(this);
         btnFraction.setOnClickListener(this);
         btnPercentage.setOnClickListener(this);
         btnSign.setOnClickListener(this);
@@ -204,8 +217,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             @Override
             public boolean onLongClick(View view) {
                 Button btn = (Button) view;
-                    if (btnAbsolute.getText().toString().equals(btn.getText().toString()))
-                        clicked(view,6 );
+                if (btnAbsolute.getText().toString().equals(btn.getText().toString()))
+                    clicked(view,6 );
                 return true;
             }
         });
@@ -230,18 +243,22 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        btnFactorial.setOnLongClickListener(new View.OnLongClickListener() {
+        // above part could be deleted, as additional pop up message
+
+        // long click memory slot will remove the "M"
+        btnMemory.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 Button btn = (Button) view;
-                if (btnFactorial.getText().toString().equals(btn.getText().toString()))
-                    clicked(view,9 );
+                if (btnMemory.getText().toString().equals(btn.getText().toString())){
+                    memorySlot = "" ;
+                    mText.setText("");
+                }
                 return true;
             }
         });
 
-        // this part could be deleted, as additional pop up message
-
+        // click on favorite checkbox, add to favorite list. Click again remove from list
         chkFavorite.setChecked(false);
         chkFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,10 +290,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         chromeHelpPopup.show(view);
     }
 
-    public void onCheckboxClicked (View view ){
-
-
-    }
 
     public void onClick(View view) {
         //favorite check box validation
@@ -284,17 +297,6 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
         // uncheck favorite
         chkFavorite.setChecked(false);
-
-        //Switch Rad to Deg
-        if(btn.getText().toString().equals("DRG")) {
-                isRadian = ! isRadian;
-            if(isRadian) {
-                informationText.setText("RAD");
-            }
-            else{
-                informationText.setText("\t\t\t\tDEG");
-            }
-        }
 
         // deal with error message clean out
         if(isResultString){
@@ -318,20 +320,20 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
 
         // deal with has results, want to enter number sign to do new calculation
         String expression = expressionText.getText().toString();
-        if (needClear && (
-                btn.getText().equals("0")
-                        || btn.getText().equals("1")
-                        || btn.getText().equals("2")
-                        || btn.getText().equals("3")
-                        || btn.getText().equals("4")
-                        || btn.getText().equals("5")
-                        || btn.getText().equals("6")
-                        || btn.getText().equals("7")
-                        || btn.getText().equals("8")
-                        || btn.getText().equals("9")
-                        || btn.getText().equals(".")
-                        || btn.getText().equals("π")
-                        || btn.getText().equals("e"))) {
+        if (needClear && ( btn.getText().equals("0")
+                || btn.getText().equals("1")
+                || btn.getText().equals("2")
+                || btn.getText().equals("3")
+                || btn.getText().equals("4")
+                || btn.getText().equals("5")
+                || btn.getText().equals("6")
+                || btn.getText().equals("7")
+                || btn.getText().equals("8")
+                || btn.getText().equals("9")
+                || btn.getText().equals(".")
+                || btn.getText().equals("π")
+                || btn.getText().equals("e")
+                || (btn.getText().equals("M") && (! memorySlot.isEmpty())))) {
             expressionText.setText("");
             resultText.setText("");
             expressionText.setTextSize(CalculatorGlossary.ExtraLargeTextSize);
@@ -342,7 +344,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             String str = CalculatorGlossary.historyList.get(ansCount % (CalculatorGlossary.historyList.size()));
             str = str.replaceAll("\\s+","");
             expressionText.setText(str.substring(0, str.indexOf('=')));
-            resultText.setText(str.substring(str.indexOf('=') + 1, str.length() ));
+            resultText.setText(str.substring(str.indexOf('=') + 1, str.length()));
             expressionText.setSelection(expressionText.getText().toString().length());
             ansCount++;
         }
@@ -356,6 +358,26 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             expressionText.setTextSize(CalculatorGlossary.ExtraLargeTextSize);
             resultText.setText("");
             needClear = false;
+        }
+        //Switch Rad to Deg
+        else if(btn.getText().toString().equals("DRG")) {
+            isRadian = ! isRadian;
+            if(isRadian) {
+                drgText.setText("RAD");
+            }
+            else{
+                drgText.setText("\t\t\t\tDEG");
+            }
+        }
+        // deal with memory slot, "M" button
+        // if press "M", and memory slot is not used.
+        else if(btn.getText().equals("M")
+                && ( memorySlot.isEmpty()) ){
+            // if resultText has value, save it to memory slot, else do nothing.
+            if(! resultText.getText().toString().isEmpty()) {
+                mText.setText("M");
+                memorySlot = resultText.getText().toString();
+            }
         }
         // delete button
         else if (btn.getText().equals("del")) {
@@ -378,10 +400,12 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             if (isEmpty(expression)) {
                 return;
             }
-            expression = expression.replaceAll("×", "*");
-            expression = expression.replaceAll("÷", "/");
-            expression = expression.replaceAll("√", "sqrt");
-            expression = expression.replaceAll("%", "/100");
+            expression = expression.replace("×", "*");
+            expression = expression.replace("÷", "/");
+            expression = expression.replace("√", "sqrt");
+            expression = expression.replace("%", "/100");
+            expression = multiplyConsecutiveM(expression);
+            expression = expression.replace("M", memorySlot);
 
 
             expressionText.setText(closeOpenBracket(expressionText.getText().toString()));
@@ -399,7 +423,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             }
             needClear = true;
         }
-        // any other button than “=" "C", "del"
+        // any other button than “=" "C", "del", "DRG",
         else {
             // if result text has value, will add transcendental sign + bring result from result text to expression test
             if (!isEmpty(resultText.getText().toString()) &&(
@@ -421,7 +445,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                             || btn.getText().equals("log")
                             || btn.getText().equals("10^")
                             || btn.getText().equals("√")
-                            || btn.getText().equals("abs"))){
+                            || btn.getText().equals("abs"))) {
                 int cursorPosition = expressionText.getSelectionStart();
                 expressionText.setText(expressionText.getText().toString().substring(0, cursorPosition) + btn.getText().toString()
                         + "(" + expressionText.getText().toString().substring(cursorPosition, expressionText.getText().toString().length()));
@@ -435,7 +459,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 resultText.setText("");
             }
             // if result text has no value, will add transcendental operator + ( |
-            else if(isEmpty(resultText.getText().toString()) &&( btn.getText().equals("1/x"))){
+            else if (isEmpty(resultText.getText().toString()) &&( btn.getText().equals("1/x"))) {
                 int cursorPosition = expressionText.getSelectionStart();
                 expressionText.setText(expressionText.getText().toString().substring(0, cursorPosition) + "("
                         + removeUselessChar(btn.getText().toString())
@@ -468,12 +492,11 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
                 expressionText.setText("");
             }
             // if result txt has value, and next input is operator,  bring result from result text to expression test, then add operator
-            else if (!isEmpty(resultText.getText().toString()) && (
-                    btn.getText().equals("+")
-                            || btn.getText().equals("-")
-                            || btn.getText().equals("×")
-                            || btn.getText().equals("÷")
-                            || btn.getText().equals("x!"))){
+            else if (!isEmpty(resultText.getText().toString())
+                    && ( btn.getText().equals("+")
+                    || btn.getText().equals("-")   //    || btn.getText().equals("x!")
+                    || btn.getText().equals("×")
+                    || btn.getText().equals("÷"))){
                 expressionText.setText(resultText.getText() + removeUselessChar(btn.getText().toString()));
                 expressionText.setTextSize(CalculatorGlossary.LargeMediumTextSize);
                 expressionText.setSelection(expressionText.getText().length());
@@ -533,8 +556,17 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         return strManipulation;
     }
 
-        private String removeUselessChar(String str){
-        return str.replace("x", "").replace("Ans","").replace("DRG","");
+    private String removeUselessChar(String str){
+        return str.replace("Ans", "").replace("x", "");
+    }
+
+    private String multiplyConsecutiveM(String str){
+        String regex = "(?<=(M))(?=\\1)";
+        String expression = "";
+        for ( String temp : str.split(regex)) {
+            expression += temp + "*";
+        }
+        return expression.substring(0, expression.length() - 1);
     }
 
     private boolean isEmpty(String str) {

@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * Created by Chao on 27/03/2016.
+ * Created by Transcendental Team on 27/03/2016.
+ * Author: Chao Wang
  */
 
 public class BoundedArrayList<E> extends AbstractList<E>{

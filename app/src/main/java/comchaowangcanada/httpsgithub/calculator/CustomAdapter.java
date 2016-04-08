@@ -1,7 +1,8 @@
 package comchaowangcanada.httpsgithub.calculator;
 
 /**
- * Created by Chao on 26/03/2016.
+ * Created by Transcendental Team on 26/03/2016.
+ * Author: Chao Wang
  */
 
 import android.app.Activity;
@@ -67,9 +68,9 @@ public class CustomAdapter extends BaseAdapter{
 
     class ViewHolder {
         TextView tv_name;
-        ImageView iv_icon;
+        // ImageView iv_icon;
         public ViewHolder(View view) {
-            //iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
+            // iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
             tv_name = (TextView) view.findViewById(R.id.tv_name);
             view.setTag(this);
         }
@@ -78,20 +79,3 @@ public class CustomAdapter extends BaseAdapter{
 
 
 
-
-    //    This is the getView for arrayAdapter
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        LayoutInflater itemlistInflater = LayoutInflater.from(getContext());
-//        View  customView = itemlistInflater.inflate(R.layout.item_list_app, parent, false);
-//
-//        String singleItem = getItem(position);
-//        TextView itemText = (TextView) customView.findViewById(R.id.view_name);
-//        ImageView itemImage = (ImageView) customView.findViewById(R.id.imageView);
-//
-//        itemText.setText(singleItem);
-//        //itemImage.setImageResource(R.drawable.calculator);
-//
-//        return customView;
-//    }
-//}

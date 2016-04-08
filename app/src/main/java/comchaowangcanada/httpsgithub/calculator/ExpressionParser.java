@@ -1,8 +1,9 @@
 package comchaowangcanada.httpsgithub.calculator;
 /**
- * Created by Transcendental Team.
+ * Created by Transcendental Team on 23/02/2016.
  * Author Daniel Thagard
  */
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Queue;

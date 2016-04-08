@@ -19,8 +19,11 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Transcendental Team on 25/03/2016.
+ * Author: Chao Wang
  */
+
+
 public class HistoryFragment extends Fragment {
 
     private  CustomAdapter historyAdapter;

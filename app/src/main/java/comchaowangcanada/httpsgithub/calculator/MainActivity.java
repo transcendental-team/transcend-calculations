@@ -11,6 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+/**
+ * Created by Transcendental Team on 27/03/2016.
+ * Author: Chao Wang
+ */
+
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

@@ -1,8 +1,10 @@
 package comchaowangcanada.httpsgithub.calculator;
 
 /**
- * Created by Chao on 23/02/2016.
+ * Created by Transcendental Team on 23/02/2016.
+ * Author: Chao Wang
  */
+
 
 import android.content.Context;
 import android.graphics.Rect;

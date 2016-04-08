@@ -18,8 +18,10 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Transcendental Team on 25/03/2016.
+ * Author: Chao Wang
  */
+
 public class FavoriteFragment extends Fragment {
 
     private  CustomAdapter favoriteAdapter;
@@ -53,8 +55,8 @@ public class FavoriteFragment extends Fragment {
                 item1.setWidth(dp2px(90));
                 item1.setIcon(R.drawable.ic_action_discard);
                 menu.addMenuItem(item1);
-                }
-            };
+            }
+        };
 
         favoriteListview.setMenuCreator(creator);
 
