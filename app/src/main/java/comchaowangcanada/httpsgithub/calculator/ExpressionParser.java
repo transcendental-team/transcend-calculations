@@ -78,6 +78,14 @@ public class ExpressionParser {
                 }
                 valueStack.push(token);
             }
+            //If token is Euler's number
+            else if (token.equals("e")){
+            	valueStack.push(Functions.E_NUMBER + "");
+            }
+            //If token is Pi
+            else if (token.equals("π")){
+            	valueStack.push(Functions.PI + "");
+            }
             //If token is a valid operator
             else if(token.matches("sin|log|sqrt|sinh")){
                 if (!tokenQueue.isEmpty() && tokenQueue.peek().equals("(")){
