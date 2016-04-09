@@ -240,9 +240,11 @@ public class Functions {
      * @param dRadians value given in Radians by user.
      * @return dResult the sine of the angle theta which was given in Radians by user.
      */
-    static final double sine(double dRadians) {
-
-        dRadians %= 2*PI; //convert dRadians to an angle between -2 PI and 2 PI
+    static final double sine(double dRadians, boolean isRadians) {
+	if(!isRadians){
+		dRadians = (dRadians*(calculatepi()/180));
+	}
+        dRadians %= 2*calculatepi(); //convert dRadians to an angle between -2 PI and 2 PI
         double dResult = dRadians; //numerator initially
         double factorial = 1; //denominator factorial initially.
         double radianMultiple = dRadians * dRadians;
