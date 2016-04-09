@@ -242,9 +242,9 @@ public class Functions {
      */
     static final double sine(double dRadians, boolean isRadians) {
 	if(!isRadians){
-		dRadians = (dRadians*(calculatepi()/180));
+		dRadians = (dRadians*(calculatePi()/180));
 	}
-        dRadians %= 2*calculatepi(); //convert dRadians to an angle between -2 PI and 2 PI
+        dRadians %= 2*calculatePi(); //convert dRadians to an angle between -2 PI and 2 PI
         double dResult = dRadians; //numerator initially
         double factorial = 1; //denominator factorial initially.
         double radianMultiple = dRadians * dRadians;
