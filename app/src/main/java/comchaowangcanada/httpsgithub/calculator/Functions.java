@@ -5,7 +5,8 @@ package comchaowangcanada.httpsgithub.calculator;
  *  @author Srikanth, Eric, Chao, Dan, Xindi
  *  Chao Wang  13/03/2016  Merge the branch to Enhance the calculatePi() method.
  *  Daniel Thagard  06/04/2016  Update the pow10(x) method
- *  Chao Wang  07/04/2016  Update the sinh(x) method to throw exception.
+ *  Chao Wang  07/04/2016  Update the sinh(x) method to delete error message. Leave parser to handle 
+ *  Sirkanth   08/04/2016  Update the sine(x) method to allow degree or radian input.
  */
 
 public class Functions {
@@ -131,7 +132,6 @@ public class Functions {
 
             // validate if summation is exceed the limits.
             if (summationOfElements > Double.MAX_VALUE) {
-                // throw new Exception("The result is out of range.");
                 break;
             }
         }
@@ -238,13 +238,14 @@ public class Functions {
      * Method to Compute the sine of the angle theta using the taylor series expansion.
      * sin(x) = x - (x^3/3!) + (x^5/5!) - (x^7/7!) + ...
      * @param dRadians value given in Radians by user.
+     * @param isRadians true if user input is radian, false if user input is degree.
      * @return dResult the sine of the angle theta which was given in Radians by user.
      */
     static final double sine(double dRadians, boolean isRadians) {
 	if(!isRadians){
-		dRadians = (dRadians*(calculatePi()/180));
+		dRadians = (dRadians*(PI/180));
 	}
-        dRadians %= 2*calculatePi(); //convert dRadians to an angle between -2 PI and 2 PI
+        dRadians %= 2*PI; //convert dRadians to an angle between -2 PI and 2 PI
         double dResult = dRadians; //numerator initially
         double factorial = 1; //denominator factorial initially.
         double radianMultiple = dRadians * dRadians;
