@@ -7,7 +7,11 @@ package comchaowangcanada.httpsgithub.calculator;
  *  Daniel Thagard  06/04/2016  Update the pow10(x) method
  *  Chao Wang  07/04/2016  Update the sinh(x) method to delete error message. Leave parser to handle 
  *  Sirkanth   08/04/2016  Update the sine(x) method to allow degree or radian input.
+ *  Chao Wang  09/04/2016  Update the sine(x) method to round the 11th digit after decimal
  */
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class Functions {
 
@@ -257,6 +261,10 @@ public class Functions {
             dResult += (i % 2 == 0 ? -1 : 1) * dRadians / factorial;
         }
 
+        //  round half up of the 11 th digit after decimal poiint.
+	BigInteger bigInt = new BigDecimal (dResult * 1e10  
+						+ (dResult >=0 ? 0.5 : -0.5)).toBigInteger();
+	dResult = bigInt.doubleValue() / 1e10 ;
         return dResult;
 
     }
