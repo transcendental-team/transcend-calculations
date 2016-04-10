@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
 /**
@@ -63,6 +65,10 @@ public class HelpFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_help, container, false);
 
+        ArrayAdapter<String> helpAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,  CalculatorGlossary.helpInformation);
+        ListView helpListView = (ListView) rootView.findViewById(R.id.help_ListView);
+
+        helpListView.setAdapter(helpAdapter);
 
         // Inflate the layout for this fragment
         return rootView;

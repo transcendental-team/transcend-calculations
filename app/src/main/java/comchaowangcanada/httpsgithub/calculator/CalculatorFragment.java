@@ -20,9 +20,10 @@ import java.util.Arrays;
 /**
  * Created by Transcendental Team on 23/02/2016.
  * Author: Chao Wang
- * Chao Wang  24/03/2016  Enhance the GUI
+ * Chao Wang  24/03/2016  Enhance the GUI to have new look, and additional buttons
  * Chao Wang  27/03/2016  Migrate from MainActivity to Calculator Fragment
  * Chao Wang  06/04/2016  Modify the button, replace factorial button to Memory button.
+ * Chao Wang  09/04/2016  Enable DEG button, allow user input to be degree or radian
  */
 
 public class CalculatorFragment extends Fragment implements View.OnClickListener {
@@ -51,7 +52,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     private CheckBox chkFavorite = null;
     private boolean needClear;
     boolean isResultString;
-    boolean isRadian ;
+    boolean isRadians ;
     private int ansCount;
     private String memorySlot;
 
@@ -59,7 +60,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
     public CalculatorFragment() {
         needClear = false;
         isResultString = false;
-        isRadian = true;
+        isRadians = true;
         ansCount = 0;
         memorySlot = "";
     }
@@ -217,8 +218,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             @Override
             public boolean onLongClick(View view) {
                 Button btn = (Button) view;
-                if (btnAbsolute.getText().toString().equals(btn.getText().toString()))
-                    clicked(view,6 );
+                    if (btnAbsolute.getText().toString().equals(btn.getText().toString()))
+                        clicked(view,6 );
                 return true;
             }
         });
@@ -321,26 +322,26 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         // deal with has results, want to enter number sign to do new calculation
         String expression = expressionText.getText().toString();
         if (needClear && ( btn.getText().equals("0")
-                || btn.getText().equals("1")
-                || btn.getText().equals("2")
-                || btn.getText().equals("3")
-                || btn.getText().equals("4")
-                || btn.getText().equals("5")
-                || btn.getText().equals("6")
-                || btn.getText().equals("7")
-                || btn.getText().equals("8")
-                || btn.getText().equals("9")
-                || btn.getText().equals(".")
-                || btn.getText().equals("π")
-                || btn.getText().equals("e")
-                || (btn.getText().equals("M") && (! memorySlot.isEmpty())))) {
+                        || btn.getText().equals("1")
+                        || btn.getText().equals("2")
+                        || btn.getText().equals("3")
+                        || btn.getText().equals("4")
+                        || btn.getText().equals("5")
+                        || btn.getText().equals("6")
+                        || btn.getText().equals("7")
+                        || btn.getText().equals("8")
+                        || btn.getText().equals("9")
+                        || btn.getText().equals(".")
+                        || btn.getText().equals("π")
+                        || btn.getText().equals("e")
+                        || (btn.getText().equals("M") && (! memorySlot.isEmpty())))) {
             expressionText.setText("");
             resultText.setText("");
             expressionText.setTextSize(CalculatorGlossary.ExtraLargeTextSize);
             needClear = false;
         }
         // history display
-        if( btn.getText().equals("Ans") && CalculatorGlossary.historyList.size() != 0){
+        if( btn.getText().equals("ANS") && CalculatorGlossary.historyList.size() != 0){
             String str = CalculatorGlossary.historyList.get(ansCount % (CalculatorGlossary.historyList.size()));
             str = str.replaceAll("\\s+","");
             expressionText.setText(str.substring(0, str.indexOf('=')));
@@ -361,8 +362,8 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         }
         //Switch Rad to Deg
         else if(btn.getText().toString().equals("DRG")) {
-            isRadian = ! isRadian;
-            if(isRadian) {
+            isRadians = ! isRadians;
+            if(isRadians) {
                 drgText.setText("RAD");
             }
             else{
@@ -372,15 +373,15 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         // deal with memory slot, "M" button
         // if press "M", and memory slot is not used.
         else if(btn.getText().equals("M")
-                && ( memorySlot.isEmpty()) ){
+                    && ( memorySlot.isEmpty()) ){
             // if resultText has value, save it to memory slot, else do nothing.
-            if(! resultText.getText().toString().isEmpty()) {
-                mText.setText("M");
-                memorySlot = resultText.getText().toString();
+                if(! resultText.getText().toString().isEmpty()) {
+                    mText.setText("M");
+                    memorySlot = resultText.getText().toString();
             }
         }
         // delete button
-        else if (btn.getText().equals("del")) {
+        else if (btn.getText().equals("DEL")) {
             // empty expression has nothing to delete
             if (isEmpty(expression)) {
                 expressionText.setText("");
@@ -403,7 +404,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             expression = expression.replace("×", "*");
             expression = expression.replace("÷", "/");
             expression = expression.replace("√", "sqrt");
-            expression = expression.replace("%", "/100");
+            expression = replaceWithinBracket(expression, "%", "/100");
             expression = multiplyConsecutiveM(expression);
             expression = expression.replace("M", memorySlot);
 
@@ -412,7 +413,7 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             expressionText.setSelection(expressionText.getText().length());
 
             expression = closeOpenBracket(expression);
-            resultText.setText(ExpressionParser.eval(expression));
+            resultText.setText(ExpressionParser.eval(expression, isRadians) );
             // if return result is an error message
             if(  resultText.getText().toString().matches(".*[a-z]+.*")){
                 resultText.setTextSize(CalculatorGlossary.SmallTextSize);
@@ -493,10 +494,11 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             }
             // if result txt has value, and next input is operator,  bring result from result text to expression test, then add operator
             else if (!isEmpty(resultText.getText().toString())
-                    && ( btn.getText().equals("+")
-                    || btn.getText().equals("-")   //    || btn.getText().equals("x!")
-                    || btn.getText().equals("×")
-                    || btn.getText().equals("÷"))){
+                        && ( btn.getText().equals("+")
+                            || btn.getText().equals("-")   //    || btn.getText().equals("x!")
+                            || btn.getText().equals("×")
+                            || btn.getText().equals("÷")
+                            || btn.getText().equals("%"))){
                 expressionText.setText(resultText.getText() + removeUselessChar(btn.getText().toString()));
                 expressionText.setTextSize(CalculatorGlossary.LargeMediumTextSize);
                 expressionText.setSelection(expressionText.getText().length());
@@ -540,24 +542,60 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
             strManipulation = "(-" + strManipulation;
         }
         else{
-            while ( (currentIndex != 0) && ((charArray[currentIndex-1] >= '0' && charArray[currentIndex-1] <= '9') || charArray[currentIndex-1] == '.') ){
+            while ((currentIndex != 0) && ((charArray[currentIndex-1] >= '0'
+                                        && charArray[currentIndex-1] <= '9')
+                                            || charArray[currentIndex-1] == '.'
+                                            || charArray[currentIndex-1] == 'π'
+                                            || charArray[currentIndex-1] == 'e' )){
                 currentIndex --;
             }
+            // at the  begining of expression, add (- sign
             if (currentIndex == 0){
                 strManipulation = "(-" + strManipulation;
             }
+            // already has the (- sign, remove to make it positive.
             else if (charArray[currentIndex-1] == '-' && charArray[currentIndex-2] == '('){
-                strManipulation = strManipulation.substring(0, currentIndex-2) + strManipulation.substring(currentIndex, charArray.length);
+                strManipulation = strManipulation.substring(0, currentIndex-2)
+                                    + strManipulation.substring(currentIndex, charArray.length);
             }
+            // not at the begining of expression, keep the previous part, add (-, append the rest part.
             else {
-                strManipulation = strManipulation.substring(0,currentIndex) + "(-" + strManipulation.substring(currentIndex , charArray.length );
+                strManipulation = strManipulation.substring(0,currentIndex) + "(-"
+                                    + strManipulation.substring(currentIndex , charArray.length );
             }
         }
         return strManipulation;
     }
 
-    private String removeUselessChar(String str){
-        return str.replace("Ans", "").replace("x", "");
+    private String replaceWithinBracket(String expression, String target, String replacement){
+        String strManipulation = expression;
+        int targetIndex;
+        while( (targetIndex = strManipulation.indexOf(target)) != -1){
+            strManipulation = strManipulation.substring(0,targetIndex+1) + ")"
+                    + strManipulation.substring(targetIndex+1 , strManipulation.length() );
+            char cha = strManipulation.charAt(targetIndex);
+            while ((targetIndex != 0) && (( cha  >= '0' && cha <= '9')
+                                        || cha == '.'|| cha == 'π'|| cha == 'e'
+                                        || cha == '%')){
+                targetIndex --;
+                cha = strManipulation.charAt(targetIndex);
+            }
+            // at the  begining of expression, add ( sign
+            if (targetIndex == 0){
+                strManipulation = "(" + strManipulation;
+            }
+            // not at the begining of expression, keep the previous part, add (-, append the rest part.
+            else {
+                strManipulation = strManipulation.substring(0,targetIndex+1) + "("
+                        + strManipulation.substring(targetIndex+1 , strManipulation.length() );
+            }
+            strManipulation = strManipulation.replaceFirst(target, replacement);
+        }
+        return strManipulation;
+    }
+
+        private String removeUselessChar(String str){
+            return str.replace("ANS", "").replace("x", "");
     }
 
     private String multiplyConsecutiveM(String str){
@@ -566,14 +604,12 @@ public class CalculatorFragment extends Fragment implements View.OnClickListener
         for ( String temp : str.split(regex)) {
             expression += temp + "*";
         }
-        return expression.substring(0, expression.length() - 1);
+        return expression.substring(0,expression.length()-1 );
     }
 
     private boolean isEmpty(String str) {
         return (str == null || str.trim().length() == 0);
     }
-
-
 
     public int isDuplicateInFavorite(String str){
         for( int index = 0 ; index < CalculatorGlossary.favoriteList.size() ; index ++){
