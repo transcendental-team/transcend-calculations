@@ -132,7 +132,7 @@ public class ExpressionParser {
                     opStack.push("@");
                 }
                 else{
-                    return "Invalid input. Functions must be enclosed in brackets.";
+                    return Error.funcCall;
                 }
                 functionStack.push(token);
             }
@@ -145,7 +145,7 @@ public class ExpressionParser {
                     applyOperation();	// apply operation until left bracket reached
                 }
                 if(opStack.isEmpty()){ //If there is not corresponding left bracket.
-                    return "Invalid syntax: check your brackets and try again.";
+                    return Error.unevenBrackets;
                 }
                 String leftBracket = opStack.pop();	// remove corresponding left bracket from opStack
                 //if there was a function outside of the brackets
@@ -154,7 +154,7 @@ public class ExpressionParser {
                 		callFunction(functionStack.pop(), valueStack.pop(), isRadian);
                 	}
                 	else {
-                		return "Invalid input. The function must take a value.";
+                		return Error.funcCall;
                 	}
                 }
                 else if (leftBracket.equals("-(")){
@@ -177,7 +177,7 @@ public class ExpressionParser {
             else if (token.matches("[*/%^+-]")){ 		//token is an operator
                 while (!opStack.isEmpty() && testPrecedence(token)){
                     if (valueStack.size() < 2){
-                        return "Invalid input: An operator must be between two operands.";
+                        return Error.missingVal;
                     }
                     //apply operation using operands on opStack with greater or equal precedence than current token.
                     applyOperation();
@@ -191,15 +191,15 @@ public class ExpressionParser {
         // apply any remaining operations
         while (!opStack.isEmpty()){
             if (valueStack.size() < 2){		//Missing operand
-                return "Invalid syntax! You may be missing an operand.";
+                return Error.missingVal;
             }
             else if (opStack.peek().matches("[(@]")){ //There is a left bracket without matching right bracket.
-                return "Invalid syntax: check your brackets";
+                return Error.unevenBrackets;
             }
             applyOperation();
         }
         if(valueStack.isEmpty()){
-            return "Invalid expression. Make sure you enter a number in your expression";
+            return Error.missingVal;
         }
         String result = valueStack.pop();
         result = verifyResult(result);
@@ -216,19 +216,19 @@ public class ExpressionParser {
     private static String verifyResult(String resultTemp){
         //Catch invalid expressions
         if (resultTemp == null){   // If no operands have been entered
-            return "Invalid expression. Please try again.";
+            return "Invalid expression.";
         }
         else if(resultTemp.matches("NaN")){
-            return "Invalid expression. Make sure that you are not performing any illegal operations.";
+            return Error.undefined;
         }
         else if(resultTemp.matches("Infinity|-Infinity")){
-            return "The result is out of range.";
+            return Error.outOfRange;
         }
         else if(!valueStack.isEmpty()){
-            return "Invalid expression. You may have forgotten to add an operator";
+            return Error.missingVal;
         }
         else if(!functionStack.isEmpty()){
-            return "Invalid expression. A function needs to be followed by brackets";
+            return Error.funcCall;
         }
         //Return correct number of decimal places
         if ( resultTemp.indexOf('.') == resultTemp.length()-2 && resultTemp.charAt(resultTemp.length()-1) == '0'){
@@ -290,7 +290,12 @@ public class ExpressionParser {
                 valueStack.push(a * b + "");
                 break;
             case '/':
-                valueStack.push(a / b + "");
+            	if (b == 0){
+            		valueStack.push("NaN");
+            	}
+            	else{
+            		valueStack.push(a / b + "");
+            	}
                 break;
             case '%':
                 valueStack.push(a % b + "");
