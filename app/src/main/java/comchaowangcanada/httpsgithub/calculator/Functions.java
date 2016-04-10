@@ -179,7 +179,7 @@ public class Functions {
         double taylorin = dInput - 1;
 
         //ln(1 + x) = x - (x^2)/2 + (x^3)/3 - (x^4)/4 +- ...
-        for (int i = 1; i < 1000; i++){
+        for (int i = 1; i < 35; i++){
             if (i % 2 == 1) { //if i is odd
                 dResult += powerOfInt(taylorin, i)/i;
             }
