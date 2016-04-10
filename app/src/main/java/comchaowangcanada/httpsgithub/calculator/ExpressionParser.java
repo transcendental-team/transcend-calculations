@@ -14,23 +14,20 @@ public class ExpressionParser {
     private static Deque<String> opStack = new ArrayDeque<String>();		//A stack for operations
     private static Deque<String> valueStack = new ArrayDeque<String>();	//A stack for operands
     private static Deque<String> functionStack = new ArrayDeque<String>(); //A stack for transcendental functions
-    private static boolean isRadian = true;
 
     /**
      * Evaluates infixExpression and returns resulting integer value
      * @return result of infix expression
      */
-    public static String eval(String infixExpression, boolean isRad){
+    public static String eval(String infixExpression, boolean isRadian){
         //remove tokens from previous expressions
         tokenQueue.clear();
         opStack.clear();
         valueStack.clear();
         functionStack.clear();
-
-        isRadian = isRad;
         tokenize(infixExpression);	//Convert String expression to Queue of string tokens
 
-        return evaluateInfix(); //Evaluate expression using the token queue.
+        return evaluateInfix(isRadian); //Evaluate expression using the token queue.
     }
 
     /**
@@ -90,7 +87,7 @@ public class ExpressionParser {
      * Evaluates infix expression from queue of string infix tokens
      * @return result of infix expression
      */
-    private static String evaluateInfix(){
+    private static String evaluateInfix(boolean isRadian){
     	String token; //The current token removed from token queue.
         double nextValue; //The next operand in the opStack parsed as a double
 
@@ -154,7 +151,7 @@ public class ExpressionParser {
                 //if there was a function outside of the brackets
                 if (leftBracket.equals("@")){
                 	if (!valueStack.isEmpty()){
-                		callFunction(functionStack.pop(), valueStack.pop());
+                		callFunction(functionStack.pop(), valueStack.pop(), isRadian);
                 	}
                 	else {
                 		return "Invalid input. The function must take a value.";
@@ -311,7 +308,7 @@ public class ExpressionParser {
      * @param funcName is the name of a transcendental function to be called
      * @param strValue is a string containing a floating point value to be evaluated
      */
-    private static void callFunction(String funcName, String strValue){
+    private static void callFunction(String funcName, String strValue, boolean isRadian){
     	// Avoid calling functions with Infinity, -Infinity, and NaN as inputs
     	if (strValue.matches("(-)?Infinity")){
             valueStack.push(strValue);
