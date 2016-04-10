@@ -97,24 +97,34 @@ public class ExpressionParser {
             token = tokenQueue.remove();
             //If token is a valid double
             if (token.matches("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")){
-                if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(")){
+                if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(|e|π")){
                     opStack.push("*"); //enable multiplication with brackets
                 }
                 valueStack.push(token);
             }
             //If token is Euler's number
-            else if (token.equals("e")){
-            	if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(")){
+            else if (token.matches("(-)?e")){
+            	if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(|e|π")){
                     opStack.push("*"); //enable multiplication with brackets
             	}
-            	valueStack.push(Functions.E_NUMBER + "");
+            	if (token.startsWith("-")){
+                	valueStack.push(-Functions.E_NUMBER + "");
+            	}
+            	else{
+            		valueStack.push(Functions.E_NUMBER + "");
+            	}
             }
             //If token is Pi
             else if (token.equals("π")){
-            	if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(")){
+            	if (!tokenQueue.isEmpty() && tokenQueue.peek().matches("sin|log|sqrt|sinh|\\(|e|π")){
                     opStack.push("*"); //enable multiplication with brackets
             	}
-            	valueStack.push(Functions.PI + "");
+            	if (token.startsWith("-")){
+                	valueStack.push(-Functions.PI + "");
+            	}
+            	else{
+            		valueStack.push(Functions.PI + "");
+            	}
             }
             //If token is a valid operator
             else if(token.matches("(-)?(sin|log|sqrt|sinh|abs)")){
