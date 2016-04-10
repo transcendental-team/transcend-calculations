@@ -36,7 +36,7 @@ public class ExpressionParser {
      * @param infixExp
      */
     private static void tokenize(String infixExp){
-    	/* The "-" is overloaded to mean both minux and negative. 
+    	/* The "-" is overloaded to mean both minus and negative. 
     	 * If the current character is "-", isNextNegative informs us
     	 * whether "-" will represent a minux (and be added as an independent token,
     	 * or a negative and be appended onto the following token..
@@ -51,7 +51,7 @@ public class ExpressionParser {
             		current = current + infixExp.charAt(++iter);
             	}
                 //multi-digit double becomes one number. WON'T MATCH xE-4.
-                if (current.matches("[0-9[.]]")){
+                if (current.matches("(-)?[0-9[.]]")){
                     while((iter < (infixExp.length() - 1))
                             &&(infixExp.charAt(iter+1) + "").matches("(-)?[0-9E[.]]")){
                         current = current + infixExp.charAt(++iter);
