@@ -225,7 +225,7 @@ public class ExpressionParser {
             return Error.outOfRange;
         }
         else if(!valueStack.isEmpty()){
-            return Error.missingVal;
+            return Error.missingOp;
         }
         else if(!functionStack.isEmpty()){
             return Error.funcCall;
