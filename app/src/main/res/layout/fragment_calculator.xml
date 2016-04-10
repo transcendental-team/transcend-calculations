@@ -9,7 +9,6 @@
     <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -17,33 +16,39 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:background="#ffffffff"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="5dp"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="0.25">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/DRG_Text"
+                android:textSize="10sp"
+                android:text="RAD"
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/informationText"
-                android:textSize="10dp"
-                android:text="RAD"
-                android:gravity="center" />
+                android:id="@+id/memory_Text"
+                android:textSize="10sp"
+                android:text=""
+                android:gravity="left" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="350dp"
-            android:layout_height="55dp"
-            android:layout_weight="1">>
-
-
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">>
 
             <EditText
                 android:id="@+id/text1"
@@ -51,20 +56,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginTop="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:padding="0dp"
                 android:textSize="55dp"
                 android:textAlignment="viewEnd"
+                android:layout_marginRight="10dp"
                 android:ellipsize="end"
                 android:singleLine="true"/>
+
+
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="1.2">
 
             <CheckBox
                 android:layout_width="wrap_content"
@@ -83,6 +91,8 @@
                 android:layout_height="fill_parent"
                 android:layout_gravity="bottom|right"
                 android:layout_marginTop="0dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:padding="0dp"
                 android:textColor="@color/colorBlack"
@@ -96,200 +106,212 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="#ffffffff"
-        android:layout_height="45dp" >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6">
 
-        <Button
-            tools:context=".MainActivity"
-            android:id="@+id/DRG_button"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_weight="0.25"
-            android:background="@drawable/black_ellipse_button"
-            android:text="DRG"
-            android:textColor="@android:color/white"
-            android:textSize="17sp"
-            android:textAllCaps="false"
-            android:layout_width="fill_parent" />
+            <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="#ffffffff"
+            android:layout_height="0dp"
+                android:layout_weight="1">
 
-        <Button
-            android:id="@+id/pi_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            android:text="π" />
+            <Button
+                tools:context=".MainActivity"
+                android:id="@+id/DRG_button"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/brown_ellipse_button"
+                android:text="DRG"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textAllCaps="false"
+                android:layout_width="fill_parent" />
 
-        <Button
-            android:id="@+id/euler_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            android:text="e" />
+            <Button
+                android:id="@+id/pi_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/black_ellipse_button"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:text="π" />
 
-        <Button
-            android:id="@+id/factorial_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            android:text="x!" />
+            <Button
+                android:id="@+id/euler_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/black_ellipse_button"
+                android:textSize="25sp"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:text="e" />
 
-        <Button
-            android:id="@+id/fraction_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            android:text="1/x" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/fraction_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/black_ellipse_button"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:text="1/x" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="#ffffffff"
-        android:layout_height="45dp">
+            <Button
+                android:id="@+id/memory_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/brown_ellipse_button"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:text="M" />
 
-        <Button
-            android:id="@+id/sine_button"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_weight="0.25"
-            android:background="@drawable/black_ellipse_button"
-            tools:context=".MainActivity"
-            android:text="sin"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textAllCaps="false"
-            android:layout_width="fill_parent"
-            android:hint="sin" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/sinh_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            android:text="sinh"
-            android:hint="sinh" />
+            <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="#ffffffff"
+            android:layout_height="0dp"
+                android:layout_weight="1">
 
-        <Button
-            android:id="@+id/log_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
-            android:text="log"
-            android:hint="log" />
+            <Button
+                android:id="@+id/sine_button"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/black_ellipse_button"
+                tools:context=".MainActivity"
+                android:text="sin"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:layout_width="fill_parent"
+                android:hint="sin" />
 
-        <Button
-            android:id="@+id/power_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-            android:text="10^"
-            android:hint="10^" />
+            <Button
+                android:id="@+id/sinh_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/black_ellipse_button"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:text="sinh"
+                android:hint="sinh" />
 
-        <Button
-            android:id="@+id/sqrt_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:layout_weight="0.25"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@drawable/black_ellipse_button"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
-            android:text="√"
-            android:hint="√" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/log_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/black_ellipse_button"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:textAllCaps="false"
+                android:text="log"
+                android:hint="log" />
 
-    <LinearLayout
+            <Button
+                android:id="@+id/power_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/black_ellipse_button"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="10^"
+                android:hint="10^" />
+
+            <Button
+                android:id="@+id/sqrt_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_weight="0.25"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/black_ellipse_button"
+                android:textSize="25sp"
+                android:textColor="@android:color/white"
+                android:text="√"
+                android:hint="√" />
+        </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="#ffffffff"
         android:layout_height="8dp"></LinearLayout>
 
-    <LinearLayout
+        <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="2.1"
         android:background="#ffffffff"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+            android:layout_marginBottom="0dp">
 
         <TableLayout
-            android:layout_width="210dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
 
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.2" >
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/leftBracket_button"
@@ -335,8 +357,8 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.2" >
+                android:layout_height="0dp"
+                android:layout_weight="1">
                 <Button
                     android:id="@+id/seven_button"
                     android:layout_height="fill_parent"
@@ -380,8 +402,8 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.2" >
+                android:layout_height="0dp"
+                android:layout_weight="1">
                 <Button
                     android:id="@+id/four_button"
                     android:layout_height="fill_parent"
@@ -425,8 +447,8 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.2" >
+                android:layout_height="0dp"
+                android:layout_weight="1">
                 <Button
                     android:id="@+id/one_button"
                     android:layout_height="fill_parent"
@@ -470,8 +492,8 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.2">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/sign_button"
@@ -517,9 +539,10 @@
         </TableLayout>
 
         <TableLayout
-            android:layout_width="70dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/delete_button"
@@ -529,11 +552,11 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="0.25"
-                android:background="@drawable/black_ellipse_button"
-                android:text="del"
+                android:background="@drawable/brown_ellipse_button"
+                android:text="DEL"
                 android:textColor="@android:color/white"
                 android:textAllCaps="false"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_width="wrap_content" />
 
             <Button
@@ -595,9 +618,10 @@
         </TableLayout>
 
         <TableLayout
-            android:layout_width="70dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/AC_button"
@@ -625,8 +649,7 @@
                 android:textSize="20sp"
                 android:textColor="@android:color/white"
                 android:textAllCaps="false"
-                android:text="abs"
-                android:hint="abs" />
+                android:text="abs"/>
 
             <Button
                 android:id="@+id/history_button"
@@ -637,11 +660,11 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="3dp"
-                android:background="@drawable/black_ellipse_button"
-                android:textSize="20sp"
+                android:background="@drawable/brown_ellipse_button"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"
                 android:textAllCaps="false"
-                android:text="Ans" />
+                android:text="ANS" />
 
             <Button
                 android:id="@+id/equal_button"

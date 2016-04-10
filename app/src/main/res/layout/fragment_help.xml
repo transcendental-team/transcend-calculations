@@ -7,14 +7,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true">
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:id="@+id/ListView_help" />
+            android:id="@+id/help_ListView" />
     </LinearLayout>
 
 </RelativeLayout>
