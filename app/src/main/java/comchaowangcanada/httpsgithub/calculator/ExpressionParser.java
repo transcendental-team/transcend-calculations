@@ -64,7 +64,7 @@ public class ExpressionParser {
                     }
                 }
                 //multi letter tokens (transcendental functions) one token
-                else if(current.matches("(-)?[a-z]")){
+                else if(current.matches("(-)?[a-z]") && !current.matches("(-)?e")){
                     while((iter < (infixExp.length() - 1))
                             && (infixExp.charAt(iter+1) + "").matches("[a-z]")){
                         current = current + infixExp.charAt(++iter);
