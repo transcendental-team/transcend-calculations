@@ -89,7 +89,6 @@ public class ExpressionParser {
      */
     private static String evaluateInfix(boolean isRadian){
         String token; //The current token removed from token queue.
-        double nextValue; //The next operand in the opStack parsed as a double
 
         //Classify the tokens as operators, functions or operands, and begin evaluating
         while(!tokenQueue.isEmpty()){
@@ -161,16 +160,10 @@ public class ExpressionParser {
                     valueStack.push(-Double.parseDouble(valueStack.pop()) + "");
                 }
 
-                //If there's a number directly after then brackets with no * sign, multiply!
+                //If there's a non operator value directly after then brackets, multiply!
                 if (!tokenQueue.isEmpty()
-                        && tokenQueue.peek().matches("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")){
-                    nextValue = Double.parseDouble(tokenQueue.remove());
-                    valueStack.push(Double.parseDouble(valueStack.pop()) * nextValue + "");
-                }
-                //If a left bracket follows, set so the values enclosed in brackets will be multiplied
-                else if (!tokenQueue.isEmpty()
-                        && tokenQueue.peek().equals("(")){
-                    opStack.push("*");
+                      && !tokenQueue.peek().matches("[*/%^+-]|\\)")){
+                	opStack.push("*");
                 }
 
             }
